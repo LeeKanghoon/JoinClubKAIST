@@ -17,6 +17,11 @@ def generic():
     print("generic here!!")
     return render_template('generic.html')
 
+@app.route("/jyprac")
+def jyprac():
+    print("jyprac here!!")
+    return render_template('jyprac.html')
+
 @app.route("/elements")
 def elements():
     print("elements here!!")
