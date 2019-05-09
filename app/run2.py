@@ -7,8 +7,9 @@ app = Flask(__name__)
 
 @app.route("/")
 def index1():
-    print("here!!")
-    return render_template('index.html')
+    print("Application starts...")
+    print("initialized key is " + str(key))
+    return render_template('index.html', key=key)
 
 @app.route("/index")
 def index2():
@@ -69,6 +70,14 @@ def login():
                 key = 1
                 print(key)
                 return redirect("/index")
+
+@app.route("/redirect_logout")
+def redirect_logout():
+    print("logout starts...")
+    global key
+    key = 0
+    print("logout ends...")
+    return redirect("/index")
 
 
 @app.route("/redirect_signup")
