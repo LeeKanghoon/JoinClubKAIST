@@ -64,12 +64,12 @@
                     <input type="text" name="ID" id="demo-name" value="" placeholder="ID 여기에 써!!" />
                   </div>
                   <div class="col-6 col-12-xsmall">
-                    <input type="text" name="PW" id="demo-email" value="" placeholder="PW 여기에 쓰든지 말던지! 흥!!" />
+                    <input type="text" name="PW" id="demo-pw" value="" placeholder="PW 여기에 쓰든지 말던지! 흥!!" />
                   </div>
                   <div class="col-12"><p> </p></div>
                   <div class="col-12">
                     <ul class="actions">
-                      <li><input type="submit" value="Log in" class="primary" /></li>
+                      <li><input type="submit" value="Log in" class="primary" onclick="input_ID()"/></li>
                       <li><input type="reset" value="Sign up" /></li>
                     </ul>
                   </div>
@@ -127,6 +127,14 @@
 			<script src="{{url_for('static', filename='js/breakpoints.min.js')}}"></script>
 			<script src="{{url_for('static', filename='js/util.js')}}"></script>
 			<script src="{{url_for('static', filename='js/main.js')}}"></script>
-
+			<script>
+				function input_ID() {
+					var id = document.getElementById("demo-name").value;
+					var pw = document.getElementById("demo-pw").value;
+					if ((id == '')||(pw == '')) {
+						alert("ID or password is empty!");
+					}
+				}
+			</script>
 	</body>
 </html>
