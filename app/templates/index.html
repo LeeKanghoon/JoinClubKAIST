@@ -75,7 +75,6 @@ Explore your campus life with us!</p>
 							<section class="tiles">
 								<article class="style1">
 									<span class="image">
-										<!--img src="images/pic01.jpg" alt="" /-->
 										<img src="{{url_for('static', filename='images/pic01.jpg')}}"/>
 									</span>
 									<a href="/generic">
@@ -197,6 +196,17 @@ Explore your campus life with us!</p>
 								</article>
 								<article class="style4">
 									<span class="image">
+										<img src="{{url_for("static", filename="images/pic12.jpg")}}"/>
+									</span>
+									<a href="/generic">
+										<h2>Pretium</h2>
+										<div class="content">
+											<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+										</div>
+									</a>
+								</article>
+								<article class="style4">
+									<span class="image">
 										<img src="{{url_for('static', filename='images/pic12.jpg')}}"/>
 									</span>
 									<a href="/generic">
@@ -208,6 +218,29 @@ Explore your campus life with us!</p>
 								</article>
 							</section>
 						</div>
+						<div id = "myHTMLWrapper" class="inner" />
+						<script>
+							var wrapper = document.getElementById("myHTMLWrapper");
+
+							var myHTML = '<section class="tiles">';
+
+							for (var i = 0; i < 3; i++) {
+								myHTML += '<article class="style' + (i+1)+'">'
+								+ '<span class="image">'
+								+ '<img src="{{url_for("static", filename="images/club_logo/pic1.jpg")}}"/>'
+								+ '</span>'
+								+	'<a href="/generic">'
+								+ '<h2>Pretium</h2>'
+								+ '<div class="content">'
+								+	'<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>'
+								+	'</div></a></article>';
+							}
+
+							myHTML += '</section>';
+
+							wrapper.innerHTML = myHTML
+
+						</script>
 					</div>
 
 				<!-- Footer -->
