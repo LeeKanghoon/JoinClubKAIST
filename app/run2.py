@@ -74,7 +74,7 @@ def login():
                 print(key)
                 key = 1
                 print(key)
-                return redirect("/index")
+                return render_template('index.html', key=key)
 
 @app.route("/redirect_logout")
 def redirect_logout():
