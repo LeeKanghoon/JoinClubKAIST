@@ -10,11 +10,11 @@ app = Flask(__name__)
 def index1():
     print("Application starts...")
     print("initialized key is " + str(key))
-    return render_template('index.html')
+    return render_template('index.html', club_name = ["SEED KAIST"], club_detail = ["Seed..."])
 
 @app.route("/index")
 def index2():
-    return render_template('index.html')
+    return render_template('index.html', club_name = "SEED KAIST")
 
 @app.route("/club_info", methods = ['POST'])
 def club_info():
@@ -30,11 +30,21 @@ def redirect_bookmark():
     global key
     global sid
     if key == 0:
-        # 경고 창 띄우는 코드 추가
+        # alert
         print("need to login")
         return render_template('index.html')
     else:
         return render_template('bookmark.html')
+
+@app.route("/bookmark")
+def bookmark():
+    print("bookmark here!!")
+    return render_template('bookmark.html')
+
+@app.route("/interested")
+def interested():
+    print("interest here!!")
+    return render_template('interested.html')
 
 @app.route("/redirect_login")
 def redirect_login():
@@ -87,6 +97,8 @@ def login():
                 return render_template('index.html')
             else:
                 print("password mismatch")
+
+
 
 
 @app.route("/redirect_logout")

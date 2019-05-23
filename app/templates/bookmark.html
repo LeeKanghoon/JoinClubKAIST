@@ -1,0 +1,126 @@
+<!DOCTYPE HTML>
+<!--
+	Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Phantom by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+		<noscript>
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/noscript.css') }}"/>
+		</noscript>
+	</head>
+	<body class="is-preload">
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+
+							<!-- Logo -->
+							<div >
+								<a href="" class="logo">
+									<span class="symbol">
+										<!--img src="images/logo.svg" alt="" /-->
+										<img src="{{url_for('static', filename='images/logo.svg')}}"/>
+
+									</span><span class="title">Join Club KAIST</span>
+								</a>
+								<!--span class="logo"><a href="#" class="button">Login</a></span>
+								<span class="logo"><a href="#" class="button">Sign Up</a></span-->
+							</div>
+							<!-- Nav -->
+								<nav>
+									<ul>
+										<li><a href="#menu">Menu</a></li>
+									</ul>
+								</nav>
+
+						</div>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<h2>Menu</h2>
+						<ul>
+							<li><a href="/index">Home</a></li>
+							<li><a href="/generic">Ipsum veroeros</a></li>
+							<li><a href="/generic">Tempus etiam</a></li>
+							<li><a href="/generic">Consequat dolor</a></li>
+							<li><a href="/jyprac">JYS</a></li>
+							<li><a href="/elements">Elements</a></li>
+                            <li>
+                                <a href="/redirect_login"> Login </a>
+                            </li>
+                            <li>
+                                <a href="/redirect_logout"> Logout </a>
+                            </li>
+							<li><a href="/redirect_signup">Sign up</a></li>
+							<li><a href="/redirect_signup">B</a></li>
+
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<header>
+								<h1>Your Bookmark.</h1>
+								<p>These clubs are bookmarked.</p>
+							</header>
+							<!--section class="tiles">
+								<article class="style1">
+									<span class="image">
+										<img src="{{url_for('static', filename='images/pic01.jpg')}}"/>
+									</span>
+									<a href="/generic">
+										<h2>Magna</h2>
+										<div class="content">
+											<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+										</div>
+									</a>
+								</article>
+							</section-->
+							<div id = "myHTMLWrapper" class="inner" />
+								<script>
+									var wrapper = document.getElementById("myHTMLWrapper");
+
+									var myHTML = '<section class="tiles">';
+
+									for (var i = 0; i < 5; i++) {
+										myHTML += '<article class="style' + (i+1)+ '">'
+										+ '<span class="image">' + '<form method="post" action="generic">'
+										+ '<input type="hidden" name="club_id" value="1" />'
+										+ '<img src="{{url_for("static", filename="images/club_logo/pic1.jpg")}}"/>'
+										+ '</form>'
+										+'</span>'
+										+	'<a href="/generic">'
+										+ '<h2>Pretium</h2>'
+										+ '<div class="content">'
+										+	'<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>'
+										+	'</div></a></article>';
+									}
+
+									myHTML += '</section>';
+
+									wrapper.innerHTML = myHTML
+
+								</script>
+							</div>
+						</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
+			<script src="{{url_for('static', filename='js/browser.min.js')}}"></script>
+			<script src="{{url_for('static', filename='js/breakpoints.min.js')}}"></script>
+			<script src="{{url_for('static', filename='js/util.js')}}"></script>
+			<script src="{{url_for('static', filename='js/main.js')}}"></script>
+
+	</body>
+</html>
