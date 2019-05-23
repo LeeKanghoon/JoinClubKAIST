@@ -1,15 +1,3 @@
-CREATE TABLE STUDENT
-(Sname VARCHAR(30) NOT NULL,
-Sid INT NOT NULL,
-Major VARCHAR(5),
-Minor VARCHAR(5),
-Nationality VARCHAR(2),
-Gender CHAR(1),
-ID VARCHAR(20),
-Password VARCHAR(20),
-UNIQUE(ID),
-PRIMARY KEY (Sid) );
-
 CREATE TABLE CLUB
 (Cname VARCHAR(20) NOT NULL,
  Csn INT NOT NULL,
@@ -39,6 +27,14 @@ CREATE TABLE EVENT
  PRIMARY KEY(Eno),
  FOREIGN KEY (ECsn) REFERENCES CLUB(Csn) );
 
+CREATE TABLE STUDENT
+(Sname VARCHAR(30) NOT NULL,
+Sid INT NOT NULL,
+Major VARCHAR(5),
+Minor VARCHAR(5),
+Nationality VARCHAR(2),
+Gender CHAR(1),
+PRIMARY KEY (Sid) );
 
 
 CREATE TABLE BOOKMARK
@@ -54,3 +50,25 @@ CREATE TABLE INTERESTED_IN
  PRIMARY KEY (IEno, ISid), 
  FOREIGN KEY(IEno) REFERENCES EVENT(Eno),
  FOREIGN KEY(ISid) REFERENCES STUDENT(Sid) );
+
+
+
+'''
+# Set cursor to the database
+    with db.cursor() as cursor:
+        # Write SQL query
+        sql = "SELECT * FROM EMPLOYEE;"
+        # Execute SQL
+        cursor.execute(sql)
+
+        # Fetch the result
+        # result is dictionary type
+        result = cursor.fetchall()
+        # Print tuples
+        print("---Employee name---")
+        for row in result:
+            print('{0} {1}'.format(row[0], row[2]))
+'''
+
+
+PATH = C:\Program Files\MySQL\MySQL Server 8.0\bin
