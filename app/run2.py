@@ -16,11 +16,8 @@ def index1():
 def index2():
     return render_template('index.html')
 
-@app.route("/generic", methods = ['POST'])
-def generic():
-    #if request.method == 'POST':
-    #    club_id = request.form['club_id']
-    print("generic here!!")
+@app.route("/club_info", methods = ['POST'])
+def club_info():
     return render_template('generic.html')
 
 @app.route("/jyprac")
