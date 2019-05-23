@@ -3,6 +3,7 @@ import pymysql
 
 global key
 key = 0
+global sid
 app = Flask(__name__)
 
 @app.route("/")
@@ -38,6 +39,7 @@ def redirect_login():
 @app.route("/login", methods = ['POST'])
 def login():
     global key # will use global key variable
+    global sid
     print("login start")
     if request.method == 'POST':
         print("method starts...")
@@ -55,7 +57,7 @@ def login():
             # Set cursor to the database
             with db.cursor() as cursor:
                 # Write SQL query
-                sql = """SELECT ID, Password FROM STUDENT WHERE ID = '""" + id + """';"""
+                sql = """SELECT Sid, ID, Password FROM STUDENT WHERE ID = '""" + id + """';"""
                 # Execute SQL
                 cursor.execute(sql)
                 # Fetch the result
@@ -67,14 +69,20 @@ def login():
         if not result: # dictionary is empty
             print("no matching ID")
         else:
-            for row in result:  # should be only one ((id, pw),)
-                real_id = row[0]
-                real_pw = row[1]
-            if (id == real_id) and (pw==real_pw):
-                print(key)
+            for row in result:  # should be only one ((Sid, id, pw),)
+                real_id = row[1]
+                real_pw = row[2]
+                print(row[0], row[1], row[2])
+            if (id == real_id) and (pw == real_pw):
+                print("key is now" + str(key))
                 key = 1
-                print(key)
-                return render_template('index.html', key=key)
+                sid = row[0]
+                print("key is now" + str(key))
+                print(str(sid) + " is using the service")
+                return render_template('index.html')
+            else:
+                print("password mismatch")
+
 
 @app.route("/redirect_logout")
 def redirect_logout():
