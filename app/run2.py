@@ -10,11 +10,11 @@ app = Flask(__name__)
 def index1():
     print("Application starts...")
     print("initialized key is " + str(key))
-    return render_template('index.html')
+    return render_template('index.html', club_name = ["SEED KAIST"], club_detail = ["Seed..."])
 
 @app.route("/index")
 def index2():
-    return render_template('index.html')
+    return render_template('index.html', club_name = "SEED KAIST")
 
 @app.route("/generic", methods = ['POST'])
 def generic():
@@ -33,7 +33,7 @@ def redirect_bookmark():
     global key
     global sid
     if key == 0:
-        # 경고 창 띄우는 코드 추가
+        # alert
         print("need to login")
         return render_template('index.html')
     else:
