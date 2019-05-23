@@ -3,20 +3,23 @@ import pymysql
 
 global key
 key = 0
+global sid
 app = Flask(__name__)
 
 @app.route("/")
 def index1():
     print("Application starts...")
     print("initialized key is " + str(key))
-    return render_template('index.html', key=key)
+    return render_template('index.html')
 
 @app.route("/index")
 def index2():
     return render_template('index.html')
 
-@app.route("/generic")
+@app.route("/generic", methods = ['POST'])
 def generic():
+    #if request.method == 'POST':
+    #    club_id = request.form['club_id']
     print("generic here!!")
     return render_template('generic.html')
 
@@ -25,10 +28,26 @@ def jyprac():
     print("jyprac here!!")
     return render_template('jyprac.html')
 
-@app.route("/elements")
-def elements():
-    print("elements here!!")
-    return render_template('elements.html')
+@app.route("/redirect_bookmark")
+def redirect_bookmark():
+    global key
+    global sid
+    if key == 0:
+        # 경고 창 띄우는 코드 추가
+        print("need to login")
+        return render_template('index.html')
+    else:
+        return render_template('bookmark.html')
+
+@app.route("/bookmark")
+def bookmark():
+    print("bookmark here!!")
+    return render_template('bookmark.html')
+
+@app.route("/interested")
+def interested():
+    print("interest here!!")
+    return render_template('interested.html')
 
 @app.route("/redirect_login")
 def redirect_login():
@@ -38,6 +57,7 @@ def redirect_login():
 @app.route("/login", methods = ['POST'])
 def login():
     global key # will use global key variable
+    global sid
     print("login start")
     if request.method == 'POST':
         print("method starts...")
@@ -55,7 +75,7 @@ def login():
             # Set cursor to the database
             with db.cursor() as cursor:
                 # Write SQL query
-                sql = """SELECT ID, Password FROM STUDENT WHERE ID = '""" + id + """';"""
+                sql = """SELECT Sid, ID, Password FROM STUDENT WHERE ID = '""" + id + """';"""
                 # Execute SQL
                 cursor.execute(sql)
                 # Fetch the result
@@ -67,14 +87,20 @@ def login():
         if not result: # dictionary is empty
             print("no matching ID")
         else:
-            for row in result:  # should be only one ((id, pw),)
-                real_id = row[0]
-                real_pw = row[1]
-            if (id == real_id) and (pw==real_pw):
-                print(key)
+            for row in result:  # should be only one ((Sid, id, pw),)
+                real_id = row[1]
+                real_pw = row[2]
+                print(row[0], row[1], row[2])
+            if (id == real_id) and (pw == real_pw):
+                print("key is now " + str(key))
                 key = 1
-                print(key)
-                return render_template('index.html', key=key)
+                sid = row[0]
+                print("key is now " + str(key))
+                print(str(sid) + " is using the service")
+                return render_template('index.html')
+            else:
+                print("password mismatch")
+
 
 
 
@@ -83,6 +109,7 @@ def redirect_logout():
     print("logout starts...")
     global key
     key = 0
+    print("key is now " + str(key))
     print("logout ends...")
     return redirect("/index")
 
@@ -91,6 +118,7 @@ def redirect_logout():
 def redirect_signup():
     print("signup here!!")
     return render_template('Sign_up.html')
+
 
 @app.route("/signup", methods = ['POST'])
 def signup():
