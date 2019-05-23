@@ -33,6 +33,16 @@ def elements():
     print("elements here!!")
     return render_template('elements.html')
 
+@app.route("/bookmark")
+def bookmark():
+    print("bookmark here!!")
+    return render_template('bookmark.html')
+
+@app.route("/interested")
+def interested():
+    print("interest here!!")
+    return render_template('interested.html')
+
 @app.route("/redirect_login")
 def redirect_login():
     print("login here!!")
