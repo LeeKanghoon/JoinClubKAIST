@@ -74,10 +74,10 @@ def login():
                 real_pw = row[2]
                 print(row[0], row[1], row[2])
             if (id == real_id) and (pw == real_pw):
-                print("key is now" + str(key))
+                print("key is now " + str(key))
                 key = 1
                 sid = row[0]
-                print("key is now" + str(key))
+                print("key is now " + str(key))
                 print(str(sid) + " is using the service")
                 return render_template('index.html')
             else:
@@ -89,6 +89,7 @@ def redirect_logout():
     print("logout starts...")
     global key
     key = 0
+    print("key is now " + str(key))
     print("logout ends...")
     return redirect("/index")
 
