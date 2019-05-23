@@ -14,7 +14,7 @@ def index1():
 
 @app.route("/index")
 def index2():
-    return render_template('index.html', club_name = "SEED KAIST")
+    return render_template('index.html', club_name = ["SEED KAIST"], club_detail = ["Seed..."])
 
 @app.route("/club_info", methods = ['POST'])
 def club_info():
@@ -32,7 +32,7 @@ def redirect_bookmark():
     if key == 0:
         # alert
         print("need to login")
-        return render_template('index.html')
+        return render_template('index.html', club_name = ["SEED KAIST"], club_detail = ["Seed..."])
     else:
         return render_template('bookmark.html')
 
@@ -94,7 +94,7 @@ def login():
                 sid = row[0]
                 print("key is now " + str(key))
                 print(str(sid) + " is using the service")
-                return render_template('index.html')
+                return render_template('index.html', club_name = ["SEED KAIST"], club_detail = ["Seed..."])
             else:
                 print("password mismatch")
 
@@ -108,7 +108,7 @@ def redirect_logout():
     key = 0
     print("key is now " + str(key))
     print("logout ends...")
-    return redirect("/index")
+    return render_template('index.html', club_name = ["SEED KAIST"], club_detail = ["Seed..."])
 
 
 @app.route("/redirect_signup")
@@ -159,7 +159,7 @@ def signup_sent(Sid, Sname, Major, Minor, Nationality, Gender, ID, PW):
     finally:
         db.close()
 
-    return redirect("/index")
+    return render_template('index.html', club_name=["SEED KAIST"], club_detail=["Seed..."])
 
 
 if __name__ == "__main__":
