@@ -15,8 +15,10 @@ def index1():
 def index2():
     return render_template('index.html')
 
-@app.route("/generic")
+@app.route("/generic", methods = ['POST'])
 def generic():
+    #if request.method == 'POST':
+    #    club_id = request.form['club_id']
     print("generic here!!")
     return render_template('generic.html')
 
@@ -89,6 +91,7 @@ def redirect_logout():
 def redirect_signup():
     print("signup here!!")
     return render_template('Sign_up.html')
+
 
 @app.route("/signup", methods = ['POST'])
 def signup():
