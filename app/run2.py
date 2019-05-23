@@ -2,7 +2,7 @@ from flask import Flask, render_template, redirect, url_for, request
 import pymysql
 
 global key
-key = 0
+key = 1
 global sid
 app = Flask(__name__)
 
@@ -49,7 +49,7 @@ def interested():
 @app.route("/redirect_login")
 def redirect_login():
     print("login here!!")
-    return render_template('Log_in.html')
+    return render_template('Log_in.html', key = key)
 
 @app.route("/login", methods = ['POST'])
 def login():
