@@ -10,7 +10,7 @@ app = Flask(__name__)
 def index1():
     print("Application starts...")
     print("initialized key is " + str(key))
-    return render_template('index.html', key=key)
+    return render_template('index.html')
 
 @app.route("/index")
 def index2():
@@ -28,10 +28,16 @@ def jyprac():
     print("jyprac here!!")
     return render_template('jyprac.html')
 
-@app.route("/elements")
-def elements():
-    print("elements here!!")
-    return render_template('elements.html')
+@app.route("/redirect_bookmark")
+def redirect_bookmark():
+    global key
+    global sid
+    if key == 0:
+        # 경고 창 띄우는 코드 추가
+        print("need to login")
+        return render_template('index.html')
+    else:
+        return render_template('bookmark.html')
 
 @app.route("/bookmark")
 def bookmark():
