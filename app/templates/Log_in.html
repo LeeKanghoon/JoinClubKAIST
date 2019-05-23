@@ -16,7 +16,7 @@
 	</head>
 	<body class="is-preload">
 		<!-- Wrapper -->
-			<div id="wrapper">
+			<a id="wrapper">
 
 				<!-- Header -->
 					<header id="header">
@@ -44,17 +44,22 @@
 				<!-- Menu -->
 					<nav id="menu">
 						<h2>Menu</h2>
+						{% if (key==1) %}
 						<ul>
 							<li><a href="/index">Home</a></li>
-							<li><a href="/generic">Ipsum veroeros</a></li>
-							<li><a href="/generic">Tempus etiam</a></li>
-							<li><a href="/generic">Consequat dolor</a></li>
-							<li><a href="/elements">Elements</a></li>
+							<li><a href="/generic">Logout</a></li>
 						</ul>
+						{% else %}
+						<ul>
+							<li><a href="/index">Home</a></li>
+							<li><a href="/generic">Login</a></li>
+							<li><a href="/generic">Sign up</a></li>
+						</ul>
+						{% endif %}
 					</nav>
 
 				<!-- Main -->
-					<div id="main">
+					<a id="main">
 						<div class="inner">
 							<header>
 								<h3>Join Club KAIST를 이용하려면 먼저 로그인해!!</h3>
@@ -69,16 +74,24 @@
                   <div class="col-12"><p> </p></div>
                   <div class="col-12">
                     <ul class="actions">
-                      <li><input type="submit" value="Log in" class="primary" onclick="input_ID()"/></li>
-                      <li><a href="/redirect_signup" class = "button">Sign up</a></li>
 
+                      <li><input type="submit" value="Log in" class="primary" onclick="check_login()"/></li>
+                      <li><a href="/redirect_signup" class = "button">Sign up</a></li>
 
                     </ul>
                   </div>
                 </form>
+				<script>
+					function login_alert() {
+						if (val&&(!key)) {
+							alert("Login failed!");
+						}
+						val = 0;
+					}
+				</script>
 							</header>
 						</div>
-					</div>
+					</a>
 
 			</div>
 
@@ -89,12 +102,10 @@
 			<script src="{{url_for('static', filename='js/util.js')}}"></script>
 			<script src="{{url_for('static', filename='js/main.js')}}"></script>
 			<script>
-				function input_ID() {
-					var id = document.getElementById("demo-name").value;
-					var pw = document.getElementById("demo-pw").value;
-					if ((id == '')||(pw == '')) {
-						alert("ID or password is empty!");
-					}
+				var val = 0;
+				var key = {{ key }};
+				function check_login() {
+					val = 1;
 				}
 			</script>
 	</body>
