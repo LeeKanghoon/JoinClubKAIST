@@ -30,19 +30,19 @@ try:
         cursor.execute(sql)
         # Fetch the result
         # result is dictionary type
-        result = cursor.fetchall()
+        result_ = cursor.fetchall()
 finally:
     db.close()
 print("DB retrieve ends...")
 
 Csn = []
 Cname_temp = []
-Clength = len(result)
+Clength = len(result_)
 print("the number of club is " + str(Clength))
 Cname = ['' for x in range(Clength)]
-for row in result:
-    Cname_temp.append(row[0])
-    Csn.append(row[1])
+for row__ in result_:
+    Cname_temp.append(row__[0])
+    Csn.append(row__[1])
 for ind, csn in enumerate(Csn):
     Cname[csn-1] = Cname_temp[ind]
 print(Cname)
@@ -202,7 +202,38 @@ def redirect_bookmark():
         print("need to login")
         return render_template('Log_in.html', key=key)
     else:
-        return render_template('bookmark.html', key=key, club_name=["SEED KAIST", "ani", "kaldi"], club_idx="0,3,5", club_length=3 )
+        print("redirect_bookmark start")
+        # retrieve the club_info from db
+        print("DB retrieve starts...")
+        db = pymysql.connect(host='localhost',
+                             port=3306,
+                             user='root',
+                             passwd='junmo12345',
+                             db='joinclubkaist',
+                             charset='utf8')
+        try:
+            # Set cursor to the database
+            with db.cursor() as cursor:
+                # Write SQL query
+                sql = """SELECT Cname, BCsn FROM BOOKMARK INNER JOIN CLUB ON BOOKMARK.BCsn = CLUB.Csn WHERE BOOKMARK.CSid='""" + str(sid) + """';"""
+                # Execute SQL
+                cursor.execute(sql)
+                # Fetch the result
+                # result is dictionary type
+                result = cursor.fetchall()
+        finally:
+            db.close()
+        print("DB retrieve ends...")
+        print(result)
+        print("redirect_bookmark finish")
+        club_name = []
+        club_idx = ""
+        club_length = length(result)
+        for row in result:
+            club_name.append(row[0])
+            club_idx = club_idx + row[1] + ","
+        club_idx = club_idx[:, -1]
+        return render_template('bookmark.html', key=key, club_name=club_name, club_idx=club_idx, club_length=club_length)
 
 @app.route("/bookmark")
 def bookmark():
@@ -261,7 +292,7 @@ def login():
                 sid = row[0]
                 print("key is now " + str(key))
                 print(str(sid) + " is using the service")
-                return render_template('index.html', club_name=Cname, club_length=Clength)
+                return render_template('index.html', club_name=Cname, club_length=Clength, key=key)
 
             else:
                 print("password mismatch")
