@@ -100,15 +100,16 @@ Explore your campus life with us!</p>
 
 									for (var i = 0; i < 5; i++) {
 										myHTML += '<article class="style' + (i+1)+ '">'
-                                        + '<span class="image" type="submit">'
-                                        + '<form method="post" action="club_info">'
-										 + '<input type="submit" name="club_id" value="자세히 알아보기" />'
+                                        + '<span class="image">'
+
 										 + '<img src="{{url_for("static", filename="images/club_logo/pic1.jpg")}}"/>'
-                                        + '</form>'
+
                                         + '</span>'
                                         + '<a>'
-										 + '<h2>{{club_name[0]}}</h2>'
-										 + '<div class="content">'
+                                        + '<form method="post" action="club_info">'
+                                        + '<h2><input type="submit" name="club_name" value={{ club_name[0] }} class="primary"/></h2>'
+										 + '</form>'
+                                        + '<div class="content">'
 										 + '<p>{{club_detail[0]}}</p>'
 										 + '</div></a></article>';
 
