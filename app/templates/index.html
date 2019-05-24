@@ -27,7 +27,7 @@
 								<a href="" class="logo">
 									<span class="symbol">
 										<!--img src="images/logo.svg" alt="" /-->
-										<img src="{{url_for('static', filename='images/logo.svg')}}"/>
+										<img src="{{url_for('static', filename='images/logo_.jpg')}}"/>
 
 									</span><span class="title">Join Club KAIST</span>
 								</a>
@@ -49,27 +49,26 @@
 						<h2>Menu</h2>
 						{% if (key==1) %}
 						<ul>
-							<li><a href="/index">Home</a></li>
+							<li><a href="/">Home</a></li>
 							<li><a href="/generic">Ipsum veroeros</a></li>
 							<li><a href="/generic">Tempus etiam</a></li>
 							<li><a href="/generic">Consequat dolor</a></li>
-							<li><a href="/jyprac">JYS</a></li>
 							<li><a href="/redirect_bookmark"> Bookmark </a></li>
+							<li><a href="/interested">Interested</a></li>
                             <li><a href="/redirect_login"> Login </a></li>
                             <li><a href="/redirect_logout"> Logout </a></li>
 							<li><a href="/redirect_signup">Sign up</a></li>
-							<li><a href="/interested">Interested</a></li>
-							<li><a href="/redirect_logout">Logout</a></li>
 						</ul>
 						{% else %}
 						<ul>
-							<li><a href="/index">Home</a></li>
+							<li><a href="/">Home</a></li>
 							<li><a href="/redirect_bookmark" onclick="alert('You are not logged in!')"> Bookmark </a></li>
 							<li><a href="/interested" onclick="alert('You are not logged in!')">Interested</a></li>
 							<li><a href="/redirect_login">Login</a></li>
 							<li><a href="/redirect_signup">Sign up</a></li>
 						</ul>
 						{% endif %}
+						<br>
 						<ul>
 							<li><a href="/aboutus">About Us</a></li>
 						</ul>
@@ -147,7 +146,7 @@ Explore your campus life with us!</p>
 								var img2 = '<img src="{{url_for("static", filename = "images/club_logo/20.jpg")}}"/>';
 
 									var wrapper = document.getElementById("myHTMLWrapper");
-
+									var pic = '1.jpg'
 									var myHTML = '<section class="tiles">';
 									for (var i = 0; i < length ; i++) {
 
