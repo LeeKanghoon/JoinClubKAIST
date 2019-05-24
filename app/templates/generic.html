@@ -13,16 +13,6 @@
 		<noscript>
 			<link rel="stylesheet" href="{{ url_for('static', filename='css/noscript.css') }}"/>
 		</noscript>
-		<script>
-						function LoopTest() {
-								var i=0;
-								var stop = 5;
-								for (i=0;i<5;i++)
-								{
-										document.write('<p>' + i + '</p>'); // This writes the number in a paragraph
-								}
-						}
-		</script>
 	</head>
 	<body class="is-preload">
 		<!-- Wrapper -->
@@ -82,7 +72,43 @@
 				<!-- Main -->
 					<div id="main">
 						<div class="inner">
-							<h1>SEED KAIST</h1>
+							<h1>{{club_name}}</h1>
+
+															<img class = "image left" id = "imageBox"/>
+
+															<script>
+															var num = '{{cnum}}';
+															var img = [
+																'static/images/club_logo/1.jpg',
+																'static/images/club_logo/2.jpg',
+																'static/images/club_logo/3.jpg',
+																'static/images/club_logo/4.jpg',
+																'static/images/club_logo/5.jpg',
+																'static/images/club_logo/6.jpg',
+																'static/images/club_logo/7.jpg',
+																'static/images/club_logo/8.jpg',
+																'static/images/club_logo/9.jpg',
+																'static/images/club_logo/10.jpg',
+																'static/images/club_logo/11.jpg',
+																'static/images/club_logo/12.jpg',
+																'static/images/club_logo/13.jpg',
+																'static/images/club_logo/14.jpg',
+																'static/images/club_logo/15.jpg',
+																'static/images/club_logo/16.jpg',
+																'static/images/club_logo/17.jpg',
+																'static/images/club_logo/18.jpg',
+																'static/images/club_logo/19.jpg',
+																'static/images/club_logo/20.jpg',
+																'static/images/club_logo/21.jpg',
+																'static/images/club_logo/22.jpg',
+
+
+															];
+
+															document.getElementById('imageBox').src = img[num-1];
+
+
+															</script>
 
 							<!--
 							<span class="image main">
@@ -98,49 +124,61 @@
 								<table>
 									<tbody>
 										<tr>
-											<td>Item One</td>
-											<td>Ante turpis integer aliquet porttitor.</td>
+											<td>Club member</td>
+											<td>{{club_member}}</td>
 										</tr>
 										<tr>
-											<td>Item Two</td>
-											<td>Vis ac commodo adipiscing arcu aliquet.</td>
+											<td>Recruit member</td>
+											<td>{{recruit_member}}</td>
 										</tr>
 										<tr>
-											<td>Item Three</td>
-											<td> Morbi faucibus arcu accumsan lorem.</td>
+											<td>Activity time</td>
+											<td>{{activity_time}}</td>
 										</tr>
 										<tr>
-											<td>Item Four</td>
-											<td>Vitae integer tempus condimentum.</td>
+											<td>Phone</td>
+											<td>{{phone}}</td>
 										</tr>
 										<tr>
-											<td>Item Five</td>
-											<td>Ante turpis integer aliquet porttitor.</td>
+											<td>Location</td>
+											<td>{{location}}</td>
+										</tr>
+										<tr>
+											<td>Homepage</td>
+											<td>{{homepage}}</td>
+										</tr>
+										<tr>
+											<td>Homepage</td>
+											<td>{{homepage}}</td>
+										</tr>
+										<tr>
+											<td>Homepage</td>
+											<td>{{homepage}}</td>
+										</tr>
+										<tr>
+											<td>Homepage</td>
+											<td>{{homepage}}</td>
 										</tr>
 									</tbody>
 								</table>
 							</div>
 
-							<h3>Club Info</h3>
 
-							<p><span class="image left"><img src="{{url_for('static', filename='images/pic14.jpg')}}"/></span>씨드 카이스트는 이러이러 한 동아리 입니당!!씨드 카이스트는 이러이러 한 동아리 입니당!!씨드 카이스트는 이러이러 한 동아리 입니당!!씨드 카이스트는 이러이러 한 동아리 입니당!!씨드 카이스트는 이러</p>
 
-							<div id="myHTMLWrapper">
+							<p><span class="image left">
 
-							</div>
 
-							<script>
-							  var wrapper = document.getElementById("myHTMLWrapper");
 
-							  var myHTML = '';
 
-							  for (var i = 0; i < 10; i++) {
-							    myHTML += '<span class="test">Testing out my script! loop #' + (i + 1) + '</span><br/>';
-							  }
 
-							  wrapper.innerHTML = myHTML
 
-							</script>
+							</span>씨드 카이스트는 이러이러 한 동아리 입니당!!씨드 카이스트는 이러이러 한 동아리 입니당!!씨드 카이스트는 이러이러 한 동아리 입니당!!씨드 카이스트는 이러이러 한 동아리 입니당!!씨드 카이스트는 이러
+씨드 카이스트는 이러이러 한 동아리 입니당!!씨드 카이스트는 이러이러 한 동아리 입니당!!씨드 카이스트는 이러이러 한 동아리 입니당!!씨드 카이스트는 이러이러 한 동아리 입니당!!씨드 카이스트는 이러
+씨드 카이스트는 이러이러 한 동아리 입니당!!씨드 카이스트는 이러이러 한 동아리 입니당!!씨드 카이스트는 이러이러 한 동아리 입니당!!씨드 카이스트는 이러이러 한 동아리 입니당!!씨드 카이스트는 이러
+씨드 카이스트는 이러이러 한 동아리 입니당!!씨드 카이스트는 이러이러 한 동아리 입니당!!씨드 카이스트는 이러이러 한 동아리 입니당!!씨드 카이스트는 이러이러 한 동아리 입니당!!씨드 카이스트는 이러
+씨드 카이스트는 이러이러 한 동아리 입니당!!씨드 카이스트는 이러이러 한 동아리 입니당!!씨드 카이스트는 이러이러 한 동아리 입니당!!씨드 카이스트는 이러이러 한 동아리 입니당!!씨드 카이스트는 이러
+						</p>
+
 						</div>
 					</div>
 
