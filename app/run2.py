@@ -52,7 +52,7 @@ def index1():
     print("Application starts...")
     print("initialized key is " + str(key))
     #return render_template('index.html', club_name = ["SEED KAIST", "hihi", "...........!!"], club_length = 79)
-    return render_template('index.html', club_name=Cname, club_length=Clength)
+    return render_template('index.html', club_name=Cname, club_length=Clength, key = key)
 
 @app.route("/index")
 def index2():
