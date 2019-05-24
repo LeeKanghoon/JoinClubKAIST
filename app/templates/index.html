@@ -142,6 +142,7 @@ Explore your campus life with us!</p>
 									'<img src="{{url_for("static", filename = "images/club_logo/19.jpg")}}"/>',
 									'<img src="{{url_for("static", filename = "images/club_logo/20.jpg")}}"/>'
 								];
+
 								var img2 = '<img src="{{url_for("static", filename = "images/club_logo/20.jpg")}}"/>';
 
 									var wrapper = document.getElementById("myHTMLWrapper");
@@ -151,8 +152,7 @@ Explore your campus life with us!</p>
 
 										myHTML += 					'<article>'
                                         + '<span class="image">'
-
-																				+ img[i+3]
+																				+ img[i]
                                         + '</span>'
                                         + '<a>'
                                         + '<form method="post" action="club_info">'
