@@ -11,6 +11,7 @@ sid = 0
 
 app = Flask(__name__)
 # retrieve the Cname, Csn  from db
+
 print("DB retrieve starts...")
 db = pymysql.connect(host='localhost',
                      port=3306,
@@ -86,7 +87,7 @@ def club_info():
         print("DB retrieve ends...")
     row = result[0]
     return render_template('generic.html', club_name=row[0], class_=row[1], district=row[2], department=row[3], establish=row[4],
-                           club_member=row[5], recruit_member=row[6], activity_time=row[7], phone=row[8], location=row[9], homepage=row[10], cnum=row[11])
+                           club_member=row[5], recruit_member=row[6], activity_time=row[7], phone=row[8], location=row[9], homepage=row[10], cnum=row[11], club_info=".this place is for description")
 
 
 @app.route("/aboutus")
