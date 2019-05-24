@@ -12,9 +12,9 @@ sid = 0
 app = Flask(__name__)
 # retrieve the Cname, Csn  from db
 print("DB retrieve starts...")
-db = pymysql.connect(host='localhost',
+db = pymysql.connect(host='143.248.192.100',
                      port=3306,
-                     user='root',
+                     user='junmo',
                      passwd='junmo12345',
                      db='joinclubkaist',
                      charset='utf8')
@@ -49,7 +49,7 @@ print(Cname)
 def index1():
     print("Application starts...")
     print("initialized key is " + str(key))
-    return render_template('index.html', club_name = ["SEED KAIST", "hihi", "...........!!"], club_length = 20)
+    return render_template('index.html', club_name = ["SEED KAIST", "hihi", "...........!!"], club_length = 79)
 
 @app.route("/index")
 def index2():
