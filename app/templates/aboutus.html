@@ -44,22 +44,29 @@
 						<h2>Menu</h2>
 						{% if (key==1) %}
 						<ul>
-							<li><a href="/index">Home</a></li>
+							<li><a href="/">Home</a></li>
+							<li><a href="/generic">Ipsum veroeros</a></li>
+							<li><a href="/generic">Tempus etiam</a></li>
+							<li><a href="/generic">Consequat dolor</a></li>
 							<li><a href="/redirect_bookmark"> Bookmark </a></li>
 							<li><a href="/interested">Interested</a></li>
-							<li><a href="/redirect_logout">Logout</a></li>
+                            <li><a href="/redirect_login"> Login </a></li>
+                            <li><a href="/redirect_logout"> Logout </a></li>
+							<li><a href="/redirect_signup">Sign up</a></li>
 						</ul>
 						{% else %}
 						<ul>
-							<li><a href="/index">Home</a></li>
+							<li><a href="/">Home</a></li>
 							<li><a href="/redirect_bookmark" onclick="alert('You are not logged in!')"> Bookmark </a></li>
 							<li><a href="/interested" onclick="alert('You are not logged in!')">Interested</a></li>
 							<li><a href="/redirect_login">Login</a></li>
 							<li><a href="/redirect_signup">Sign up</a></li>
 						</ul>
 						{% endif %}
+						<br>
 						<ul>
 							<li><a href="/aboutus">About Us</a></li>
+						</ul>
 					</nav>
 
 				<!-- Main -->
@@ -81,51 +88,16 @@
                                 <img src="{{url_for('static', filename='images/main_logo.jpg')}}"/>
                             </span></p>
 
-                            <p>This is team 7</p>
+                            <h2>Team 7</h2>
+							<div>
+								<ul>
+									<li>20150722 조준모</li>
+									<li>20150531 이강훈</li>
+									<li>20150880 심지예</li>
+								</ul>
+							</div>
 						</div>
 					</div>
-
-				<!-- Footer -->
-					<footer id="footer">
-						<div class="inner">
-							<section>
-								<h2>Get in touch</h2>
-								<form method="post" action="#">
-									<div class="fields">
-										<div class="field half">
-											<input type="text" name="name" id="name" placeholder="Name" />
-										</div>
-										<div class="field half">
-											<input type="email" name="email" id="email" placeholder="Email" />
-										</div>
-										<div class="field">
-											<textarea name="message" id="message" placeholder="Message"></textarea>
-										</div>
-									</div>
-									<ul class="actions">
-										<li><input type="submit" value="Send" class="primary" /></li>
-									</ul>
-								</form>
-							</section>
-							<section>
-								<h2>Follow</h2>
-								<ul class="icons">
-									<li><a href="#" class="icon style2 fa-twitter"><span class="label">Twitter</span></a></li>
-									<li><a href="#" class="icon style2 fa-facebook"><span class="label">Facebook</span></a></li>
-									<li><a href="#" class="icon style2 fa-instagram"><span class="label">Instagram</span></a></li>
-									<li><a href="#" class="icon style2 fa-dribbble"><span class="label">Dribbble</span></a></li>
-									<li><a href="#" class="icon style2 fa-github"><span class="label">GitHub</span></a></li>
-									<li><a href="#" class="icon style2 fa-500px"><span class="label">500px</span></a></li>
-									<li><a href="#" class="icon style2 fa-phone"><span class="label">Phone</span></a></li>
-									<li><a href="#" class="icon style2 fa-envelope-o"><span class="label">Email</span></a></li>
-								</ul>
-							</section>
-							<ul class="copyright">
-								<li>&copy; Untitled. All rights reserved</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-							</ul>
-						</div>
-					</footer>
-
 			</div>
 
 		<!-- Scripts -->
