@@ -45,14 +45,9 @@
 						{% if (key==1) %}
 						<ul>
 							<li><a href="/">Home</a></li>
-							<li><a href="/generic">Ipsum veroeros</a></li>
-							<li><a href="/generic">Tempus etiam</a></li>
-							<li><a href="/generic">Consequat dolor</a></li>
 							<li><a href="/redirect_bookmark"> Bookmark </a></li>
 							<li><a href="/interested">Interested</a></li>
-                            <li><a href="/redirect_login"> Login </a></li>
-                            <li><a href="/redirect_logout"> Logout </a></li>
-							<li><a href="/redirect_signup">Sign up</a></li>
+              <li><a href="/redirect_logout"> Logout </a></li>
 						</ul>
 						{% else %}
 						<ul>
@@ -73,6 +68,20 @@
 					<div id="main">
 						<div class="inner">
 							<h1>{{club_name}}</h1>
+
+							{% if (key == 1) %}
+								{% if (bookmark_v == 0) %}
+									<form method="post" action="club_info">
+									<input type = "hidden" name = "bookmark_check" value = 0>
+									<h2><input type="submit" name="bookmark" class="primary" value="bookmark" /></h2>
+									</form>
+								{% else %}
+									<form method="post" action="club_info">
+									<input type = "hidden" name = "bookmark_check" value = 1>
+									<h2><input type="submit" name="bookmark" class="primary" value="bookmarked" /></h2>
+									</form>
+								{% endif %}
+							{% endif %}
 
 															<img class = "image left" id = "imageBox"/>
 

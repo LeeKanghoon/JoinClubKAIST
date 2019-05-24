@@ -5,9 +5,11 @@ global key
 global sid
 global Cname
 global Clength
-key = 0
+global bookmark
+key = 1
 Clength = 0
 sid = 0
+bookmark_v = 1
 
 app = Flask(__name__)
 
@@ -33,7 +35,8 @@ def club_info():
         # retrieve the club_info from db
 
     return render_template('generic.html', club_name="name", class_="class", district="district", department="dep", establish="est",
-                           club_member="c mem", recruit_member="r mem", activity_time="a time", phone="pho", location="lo", homepage="home", cnum="2", cinfo = "....")
+                           club_member="c mem", recruit_member="r mem", activity_time="a time", phone="pho", location="lo", homepage="home", cnum="2", cinfo = "....",
+                           key = key, bookmark_v = bookmark_v)
 
 
 @app.route("/aboutus")
@@ -66,6 +69,11 @@ def interested():
 def redirect_login():
     print("login here!!")
     return render_template('Log_in.html', key=key)
+
+@app.route("/elements")
+def elements():
+    print("element here!!")
+    return render_template('elements.html', key=key)
 
 @app.route("/login", methods = ['POST'])
 def login():

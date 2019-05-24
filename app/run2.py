@@ -5,9 +5,11 @@ global key
 global sid
 global Cname
 global Clength
+global bookmark_v
 key = 0
 Clength = 0
 sid = 0
+bookmark_v = 1
 
 app = Flask(__name__)
 # retrieve the Cname, Csn  from db
@@ -87,7 +89,8 @@ def club_info():
         print("DB retrieve ends...")
     row = result[0]
     return render_template('generic.html', club_name=row[0], class_=row[1], district=row[2], department=row[3], establish=row[4],
-                           club_member=row[5], recruit_member=row[6], activity_time=row[7], phone=row[8], location=row[9], homepage=row[10], cnum=row[11], cinfo=row[12])
+                           club_member=row[5], recruit_member=row[6], activity_time=row[7], phone=row[8], location=row[9], homepage=row[10], cnum=row[11], cinfo=row[12],
+                           key = key, bookmark_v = bookmark_v)
 
 
 @app.route("/aboutus")
