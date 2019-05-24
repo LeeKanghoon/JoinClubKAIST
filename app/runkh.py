@@ -31,30 +31,9 @@ def club_info():
         club_name = request.form['club_name']
         club_num = request.form['club_num']
         # retrieve the club_info from db
-        print("DB retrieve starts...")
-        db = pymysql.connect(host='localhost',
-                             port=3306,
-                             user='root',
-                             passwd='junmo12345',
-                             db='joinclubkaist',
-                             charset='utf8')
-        try:
-            # Set cursor to the database
-            with db.cursor() as cursor:
-                # Write SQL query
-                sql = """SELECT Cname, Class, District, Department, Establish, Num_member, Num_recruit, Activity_time, Phone, Room, Homepage, Csn
-                FROM STUDENT INNER JOIN CLUB ON STUDENT.Sid = CLUB.Csid WHERE CLUB.Csn='"""+str(club_num)+"""';"""
-                # Execute SQL
-                cursor.execute(sql)
-                # Fetch the result
-                # result is dictionary type
-                result = cursor.fetchall()
-        finally:
-            db.close()
-        print("DB retrieve ends...")
-    row = result[0]
-    return render_template('generic.html', club_name=row[0], class_=row[1], district=row[2], department=row[3], establish=row[4],
-                           club_member=row[5], recruit_member=row[6], activity_time=row[7], phone=row[8], location=row[9], homepage=row[10], cnum=row[11])
+
+    return render_template('generic.html', club_name="name", class_="class", district="district", department="dep", establish="est",
+                           club_member="c mem", recruit_member="r mem", activity_time="a time", phone="pho", location="lo", homepage="home", cnum="2", cinfo = "....")
 
 
 @app.route("/aboutus")
