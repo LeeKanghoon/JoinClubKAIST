@@ -27,7 +27,7 @@
 								<a href="" class="logo">
 									<span class="symbol">
 										<!--img src="images/logo.svg" alt="" /-->
-										<img src="{{url_for('static', filename='images/logo.svg')}}"/>
+										<img src="{{url_for('static', filename='images/logo_.jpg')}}"/>
 
 									</span><span class="title">Join Club KAIST</span>
 								</a>
@@ -49,27 +49,26 @@
 						<h2>Menu</h2>
 						{% if (key==1) %}
 						<ul>
-							<li><a href="/index">Home</a></li>
+							<li><a href="/">Home</a></li>
 							<li><a href="/generic">Ipsum veroeros</a></li>
 							<li><a href="/generic">Tempus etiam</a></li>
 							<li><a href="/generic">Consequat dolor</a></li>
-							<li><a href="/jyprac">JYS</a></li>
 							<li><a href="/redirect_bookmark"> Bookmark </a></li>
+							<li><a href="/interested">Interested</a></li>
                             <li><a href="/redirect_login"> Login </a></li>
                             <li><a href="/redirect_logout"> Logout </a></li>
 							<li><a href="/redirect_signup">Sign up</a></li>
-							<li><a href="/interested">Interested</a></li>
-							<li><a href="/redirect_logout">Logout</a></li>
 						</ul>
 						{% else %}
 						<ul>
-							<li><a href="/index">Home</a></li>
+							<li><a href="/">Home</a></li>
 							<li><a href="/redirect_bookmark" onclick="alert('You are not logged in!')"> Bookmark </a></li>
 							<li><a href="/interested" onclick="alert('You are not logged in!')">Interested</a></li>
 							<li><a href="/redirect_login">Login</a></li>
 							<li><a href="/redirect_signup">Sign up</a></li>
 						</ul>
 						{% endif %}
+						<br>
 						<ul>
 							<li><a href="/aboutus">About Us</a></li>
 						</ul>
@@ -115,33 +114,51 @@ Explore your campus life with us!</p>
 								}
 							}
 
+
+
+
 							</script>
 							<div id = "myHTMLWrapper" class="inner" />
 								<script>
+								var img = [
+									'<img src="{{url_for("static", filename = "images/club_logo/1.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/club_logo/2.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/club_logo/3.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/club_logo/4.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/club_logo/5.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/club_logo/6.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/club_logo/7.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/club_logo/8.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/club_logo/9.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/club_logo/10.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/club_logo/11.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/club_logo/12.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/club_logo/13.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/club_logo/14.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/club_logo/15.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/club_logo/16.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/club_logo/17.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/club_logo/18.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/club_logo/19.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/club_logo/20.jpg")}}"/>'
+								];
+								var img2 = '<img src="{{url_for("static", filename = "images/club_logo/20.jpg")}}"/>';
 
 									var wrapper = document.getElementById("myHTMLWrapper");
 									var pic = '1.jpg'
 									var myHTML = '<section class="tiles">';
-<<<<<<< HEAD
-									for (var i = 0; i < 5; i++) {
-										myHTML += '<article class="style' + (i+1)+ '">'
-                                        + '<span class="image">'
-										 + '<img src="{{url_for('static', filename='images/club_logo/' + pic )}}"/>'
-=======
-
 									for (var i = 0; i < length ; i++) {
-										var name = 'images/club_logo/pic01.jpg';
-										//image_link = '"images/club_logo/pic'+(i+1).toString()+'.jpg"';
+
 										myHTML += 					'<article>'
                                         + '<span class="image">'
-																				+ '<img src="{{url_for("static", filename="images/club_logo/pic1.jpg")}}"/>'
->>>>>>> b74e30239810ed00e8cf86cceac1a081b3cd87f3
+
+																				+ img[i+3]
                                         + '</span>'
                                         + '<a>'
                                         + '<form method="post" action="club_info">'
                                         + '<h2><input type="submit" name="club_name" value='+club_name3[i]+' class="primary"/></h2>'
 										 									+ '</form>'
-                                        + '<div class="content">'
+                                      + '<div class="content">'
 										 									+ '<p>'+club_name3[i]+'</p>'
 										 								+ '</div></a></article>';
 

@@ -11,6 +11,41 @@ sid = 0
 
 app = Flask(__name__)
 
+# retrieve the Cname, Csn  from db
+print("DB retrieve starts...")
+db = pymysql.connect(host='localhost',
+                     port=3306,
+                     user='root',
+                     passwd='junmo12345',
+                     db='joinclubkaist',
+                     charset='utf8')
+try:
+    # Set cursor to the database
+    with db.cursor() as cursor:
+        # Write SQL query
+        sql = """SELECT Cname, Csn FROM CLUB;"""
+        # Execute SQL
+        cursor.execute(sql)
+        # Fetch the result
+        # result is dictionary type
+        result = cursor.fetchall()
+finally:
+    db.close()
+print("DB retrieve ends...")
+
+Csn = []
+Cname_temp = []
+Clength = len(result)
+print("the number of club is " + str(Clength))
+Cname = ['' for x in range(Clength)]
+for row in result:
+    Cname_temp.append(row[0])
+    Csn.append(row[1])
+for ind, csn in enumerate(Csn):
+    Cname[csn-1] = Cname_temp[ind]
+print(Cname)
+
+
 @app.route("/")
 def index1():
     print("Application starts...")

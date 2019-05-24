@@ -1,14 +1,5 @@
 import pymysql
 import csv
-import numpy
-
-f1 = open('C:/Users/junmo/workspace/cs360_workspace/data/club_db.csv','r', encoding='utf-8-sig')
-r1 = csv.reader(f1)
-club_db = []
-for row in r1:
-    club_db.append(row)
-f1.close()
-club_db = club_db[1:]
 
 # Connect to database
 db = pymysql.connect(host='localhost',
@@ -16,7 +7,7 @@ db = pymysql.connect(host='localhost',
                      user='root',
                      passwd='junmo12345',
                      db='joinclubkaist',
-                     charset='utf8')
+                     charset='utf8mb4')
 
 try:
     # Set cursor to the database
