@@ -15,7 +15,7 @@ app = Flask(__name__)
 def index1():
     print("Application starts...")
     print("initialized key is " + str(key))
-    return render_template('index.html', club_name = ["SEED KAIST", "hihi", "...........!!"], club_length = 5)
+    return render_template('index.html', club_name = ["SEED KAIST", "hihi", "...........!!"], club_length = 20)
 
 @app.route("/index")
 def index2():
@@ -23,7 +23,7 @@ def index2():
 
 @app.route("/club_info", methods = ['POST'])
 def club_info():
-    return render_template('generic.html')
+    return render_template('generic.html', club_name = "SEED KAIST", club_member = 30, recruit_member = 10, activity_time = "10:30~11:30", phone = "010-6606-7459", location = "N12-1 #302", homepage = "https://cafe.naver.com/seedkaist", cnum = 1)
 
 @app.route("/aboutus")
 def aboutus():
