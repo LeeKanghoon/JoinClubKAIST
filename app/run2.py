@@ -11,6 +11,7 @@ sid = 0
 
 app = Flask(__name__)
 # retrieve the Cname, Csn  from db
+'''
 print("DB retrieve starts...")
 db = pymysql.connect(host='143.248.192.100',
                      port=3306,
@@ -43,7 +44,7 @@ for row in result:
 for ind, csn in enumerate(Csn):
     Cname[csn-1] = Cname_temp[ind]
 print(Cname)
-
+'''
 @app.route("/")
 def index1():
     print("Application starts...")
