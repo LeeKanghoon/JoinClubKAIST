@@ -173,9 +173,9 @@ def redirect_bookmark():
     if key == 0:
         # alert
         print("need to login")
-        return render_template('Log_in.html', key=key, club_name = ["SEED KAIST"], club_detail = ["Seed..."])
+        return render_template('Log_in.html', key=key)
     else:
-        return render_template('bookmark.html', key=key)
+        return render_template('bookmark.html', key=key, club_name=["SEED KAIST", "ani", "kaldi"], club_idx="0,3,5", club_length=3 )
 
 @app.route("/bookmark")
 def bookmark():
