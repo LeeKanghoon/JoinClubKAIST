@@ -47,22 +47,30 @@
 				<!-- Menu -->
 					<nav id="menu">
 						<h2>Menu</h2>
+						{% if (key==1) %}
 						<ul>
-							<li><a href="/index">Home</a></li>
+							<li><a href="/">Home</a></li>
 							<li><a href="/generic">Ipsum veroeros</a></li>
 							<li><a href="/generic">Tempus etiam</a></li>
 							<li><a href="/generic">Consequat dolor</a></li>
-							<li><a href="/jyprac">JYS</a></li>
-							<li><a href="/elements">Elements</a></li>
-                            <li>
-                                <a href="/redirect_login"> Login </a>
-                            </li>
-                            <li>
-                                <a href="/redirect_logout"> Logout </a>
-                            </li>
+							<li><a href="/redirect_bookmark"> Bookmark </a></li>
+							<li><a href="/interested">Interested</a></li>
+                            <li><a href="/redirect_login"> Login </a></li>
+                            <li><a href="/redirect_logout"> Logout </a></li>
 							<li><a href="/redirect_signup">Sign up</a></li>
-							<li><a href="/redirect_signup">B</a></li>
-
+						</ul>
+						{% else %}
+						<ul>
+							<li><a href="/">Home</a></li>
+							<li><a href="/redirect_bookmark" onclick="alert('You are not logged in!')"> Bookmark </a></li>
+							<li><a href="/interested" onclick="alert('You are not logged in!')">Interested</a></li>
+							<li><a href="/redirect_login">Login</a></li>
+							<li><a href="/redirect_signup">Sign up</a></li>
+						</ul>
+						{% endif %}
+						<br>
+						<ul>
+							<li><a href="/aboutus">About Us</a></li>
 						</ul>
 					</nav>
 
