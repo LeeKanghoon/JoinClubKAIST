@@ -2,7 +2,7 @@ from flask import Flask, render_template, redirect, url_for, request
 import pymysql
 
 global key
-key = 1
+key = 0
 global sid
 app = Flask(__name__)
 
@@ -10,20 +10,20 @@ app = Flask(__name__)
 def index1():
     print("Application starts...")
     print("initialized key is " + str(key))
-    return render_template('index.html', club_name = ["SEED KAIST"], club_detail = ["Seed..."])
+    return render_template('index.html', key=key, club_name = ["SEED KAIST"], club_detail = ["Seed..."])
 
 @app.route("/index")
 def index2():
-    return render_template('index.html', club_name = ["SEED KAIST"], club_detail = ["Seed..."])
+    return render_template('index.html', key=key, club_name = ["SEED KAIST"], club_detail = ["Seed..."])
 
 @app.route("/club_info", methods = ['POST'])
 def club_info():
     return render_template('generic.html')
 
-@app.route("/jyprac")
-def jyprac():
-    print("jyprac here!!")
-    return render_template('jyprac.html')
+@app.route("/aboutus")
+def aboutus():
+    print("aboutus here!!")
+    return render_template('aboutus.html', key=key)
 
 @app.route("/redirect_bookmark")
 def redirect_bookmark():
@@ -32,14 +32,14 @@ def redirect_bookmark():
     if key == 0:
         # alert
         print("need to login")
-        return render_template('index.html', club_name = ["SEED KAIST"], club_detail = ["Seed..."])
+        return render_template('Log_in.html', key=key, club_name = ["SEED KAIST"], club_detail = ["Seed..."])
     else:
-        return render_template('bookmark.html')
+        return render_template('bookmark.html', key=key)
 
 @app.route("/bookmark")
 def bookmark():
     print("bookmark here!!")
-    return render_template('bookmark.html')
+    return render_template('bookmark.html', key=key)
 
 @app.route("/interested")
 def interested():
@@ -49,7 +49,7 @@ def interested():
 @app.route("/redirect_login")
 def redirect_login():
     print("login here!!")
-    return render_template('Log_in.html', key = key)
+    return render_template('Log_in.html', key=key)
 
 @app.route("/login", methods = ['POST'])
 def login():
@@ -94,9 +94,10 @@ def login():
                 sid = row[0]
                 print("key is now " + str(key))
                 print(str(sid) + " is using the service")
-                return render_template('index.html', club_name = ["SEED KAIST"], club_detail = ["Seed..."])
+                return render_template('index.html', key=key, club_name = ["SEED KAIST"], club_detail = ["Seed..."])
             else:
                 print("password mismatch")
+                return render_template('Log_in.html', key=key)
 
 
 
@@ -108,13 +109,13 @@ def redirect_logout():
     key = 0
     print("key is now " + str(key))
     print("logout ends...")
-    return render_template('index.html', club_name = ["SEED KAIST"], club_detail = ["Seed..."])
+    return render_template('index.html', key=key, club_name = ["SEED KAIST"], club_detail = ["Seed..."])
 
 
 @app.route("/redirect_signup")
 def redirect_signup():
     print("signup here!!")
-    return render_template('Sign_up.html')
+    return render_template('Sign_up.html', key=key)
 
 
 @app.route("/signup", methods = ['POST'])
@@ -159,7 +160,7 @@ def signup_sent(Sid, Sname, Major, Minor, Nationality, Gender, ID, PW):
     finally:
         db.close()
 
-    return render_template('index.html', club_name=["SEED KAIST"], club_detail=["Seed..."])
+    return render_template('index.html', key=key, club_name=["SEED KAIST"], club_detail=["Seed..."])
 
 
 if __name__ == "__main__":
