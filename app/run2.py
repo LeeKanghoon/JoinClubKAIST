@@ -140,7 +140,21 @@ def bookmark_insert():
     print("bookmark_insert start")
     if request.method == 'POST':
         print("method starts...")
+
         csn = request.form['csn']
+        club_name = request.form['club_name']
+        class_ = request.form['class_']
+        district = request.form['district']
+        department = request.form['department']
+        establish = request.form['establish']
+        club_member = request.form['club_member']
+        recruit_member = request.form['recruit_member']
+        activity_time = request.form['activity_time']
+        phone = request.form['phone']
+        location = request.form['location']
+        homepage = request.form['homepage']
+        cnum = request.form['cnum']
+        cinfo = request.form['cinfo']
         # retrieve the club_info from db
         print("DB update starts...")
         db = pymysql.connect(host='localhost',
@@ -159,7 +173,10 @@ def bookmark_insert():
             db.close()
         print("DB update ends...")
     print("bookmark_insert finish")
-    return club_info()
+    return render_template('generic.html', club_name=club_name, class_=class_, district=district, department=department, establish=establish,
+                           club_member=club_member, recruit_member=recruit_member, activity_time=activity_time, phone=phone, location=location, homepage=homepage,
+                            cnum=cnum, cinfo=cinfo,
+                           key=key, bookmark_v=1)
 
 @app.route("/bookmark_delete", methods = ['POST'])
 def bookmark_delete():
