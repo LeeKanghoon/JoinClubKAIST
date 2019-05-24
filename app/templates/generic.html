@@ -69,8 +69,8 @@
 
 							{% if (key == 1) %}
 								{% if (bookmark_v == 0) %}
-									<form method="post" action="bookmark_modify">
-									<input type = "hidden" name = "bookmark_check" value = 1>
+									<form method="post" action="club_info">
+									<input type = "hidden" name = "bookmark_modify" value = {{cnum}}>
 									<h2><input type="submit" name="bookmark" class="primary" value="bookmark" /></h2>
 									</form>
 								{% else %}

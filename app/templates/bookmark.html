@@ -70,24 +70,50 @@
 								<h1>Your Bookmark.</h1>
 								<p>These clubs are bookmarked.</p>
 							</header>
+
+							<script>
+							var length = '{{club_length}}'.toString();
+							var club_name = '{{club_name}}';
+							var test = club_name.indexOf("]");
+							var club_name2 = club_name.substring(1, test);
+							var club_name3 = club_name2.split(",");
+							var print = club_name3[0].toString();
+
+							var club_name4 = 1;
+							var test_real = 0;
+							for (var i = 0; i<length; i++){
+								club_name3[i] = club_name3[i].toString();
+								if (i == 0){
+								club_name3[i] = club_name3[i].substring(5, club_name3[i].length-5);
+								}else{
+								club_name3[i] = club_name3[i].substring(6, club_name3[i].length-5);
+								}
+							}
+
+							var club_idx = [0, 3, 5];
+							//club_idx.split(",");
+
+
+							</script>
+
 							<div id = "myHTMLWrapper" class="inner" />
 								<script>
 									var wrapper = document.getElementById("myHTMLWrapper");
-
 									var myHTML = '<section class="tiles">';
+									for (var i = 0; i < length ; i++) {
 
-									for (var i = 0; i < 5; i++) {
-										myHTML += '<article class="style' + (i+1)+ '">'
-										+ '<span class="image">' + '<form method="post" action="generic">'
-										+ '<input type="hidden" name="club_id" value="1" />'
-										+ '<img src="{{url_for("static", filename="images/club_logo/pic1.jpg")}}"/>'
-										+ '</form>'
-										+'</span>'
-										+	'<a href="/generic">'
-										+ '<h2>Pretium</h2>'
-										+ '<div class="content">'
-										+	'<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>'
-										+	'</div></a></article>';
+										myHTML += '<article>'
+																				+ '<span class="image">'
+																				+ img[i]
+																				+ '</span>'
+																				+ '<a>'
+																				+ '<form method="post" action="club_info">'
+																				+ '<input type = "hidden" name = "club_num" value = '+(i+1)+'>'
+																				+ '<h2><input type="submit" name="club_name" value='+club_name3[i]+' class="primary"/></h2>'
+																				+ '</form>'
+																				+ '<div class="content">'
+																				+ '<p>'+club_name3[i]+'</p>'
+																				+ '</div></a></article>';
 									}
 
 									myHTML += '</section>';
