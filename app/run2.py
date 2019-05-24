@@ -5,11 +5,11 @@ global key
 global sid
 global Cname
 global Clength
-global bookmark_v
+
 key = 0
 Clength = 0
 sid = 0
-bookmark_v = 1
+
 
 app = Flask(__name__)
 # retrieve the Cname, Csn  from db
@@ -60,6 +60,8 @@ def index2():
 
 @app.route("/club_info", methods = ['POST'])
 def club_info():
+    global key
+    global sid
     print("club_info start")
     if request.method == 'POST':
         print("method starts...")
@@ -88,9 +90,49 @@ def club_info():
             db.close()
         print("DB retrieve ends...")
     row = result[0]
+    print("club_info finish")
+
+    print("bookmark_info start")
+    if (key == 0):
+        print("user is not logged in")
+        bookmark_v = 0
+    else:
+        # retrieve the club_info from db
+        print("DB retrieve starts...")
+        db = pymysql.connect(host='localhost',
+                             port=3306,
+                             user='root',
+                             passwd='junmo12345',
+                             db='joinclubkaist',
+                             charset='utf8')
+        try:
+            # Set cursor to the database
+            with db.cursor() as cursor:
+                # Write SQL query
+                sql = """SELECT BCsn FROM BOOKMARK WHERE BOOKMARK.BSid='""" + str(sid) + """';"""
+                # Execute SQL
+                cursor.execute(sql)
+                # Fetch the result
+                # result is dictionary type
+                result = cursor.fetchall()
+        finally:
+            db.close()
+        print("DB retrieve ends...")
+        bookmark_list = []
+        for row_ in result:
+            bookmark_list.append(row_[0])
+        print(bookmark_list)
+    if row[11] in bookmark_list:
+        print("the club is already in bookmark list")
+        bookmark_v = 1;
+    else:
+        print("the club is not in bookmark list")
+        bookmark_v = 0;
+    print("bookmark_info finish")
+
     return render_template('generic.html', club_name=row[0], class_=row[1], district=row[2], department=row[3], establish=row[4],
                            club_member=row[5], recruit_member=row[6], activity_time=row[7], phone=row[8], location=row[9], homepage=row[10], cnum=row[11], cinfo=row[12],
-                           key = key, bookmark_v = bookmark_v)
+                           key=key, bookmark_v=bookmark_v)
 
 
 @app.route("/aboutus")
