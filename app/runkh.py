@@ -18,7 +18,7 @@ app = Flask(__name__)
 def index1():
     print("Application starts...")
     print("initialized key is " + str(key))
-    return render_template('index.html', club_name = ["SEED KAIST", "hihi", "...........!!"], club_length = 79)
+    return render_template('index.html', club_name = ["SEED KAIST", "hihi", "...........!!"], club_length = 79, key = key)
     #return render_template('index.html', club_name=Cname, club_length=Clength)
 
 @app.route("/index")
@@ -134,7 +134,7 @@ def redirect_logout():
     key = 0
     print("key is now " + str(key))
     print("logout ends...")
-    return render_template('index.html', club_name=Cname, club_length=Clength)
+    return render_template('index.html', club_name = ["SEED KAIST", "hihi", "...........!!"], club_length = 79, key = key)
 
 
 @app.route("/redirect_signup")
