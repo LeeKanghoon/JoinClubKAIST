@@ -2,14 +2,10 @@ from flask import Flask, render_template, redirect, url_for, request
 import pymysql
 
 global key
-<<<<<<< HEAD
-=======
-key = 0
->>>>>>> 95d664aacc4328407b1731722072996c66f54ccb
 global sid
 global Cname
 global Clength
-key = 1
+key = 0
 Clength = 0
 sid = 0
 
@@ -163,11 +159,8 @@ def login():
                 sid = row[0]
                 print("key is now " + str(key))
                 print(str(sid) + " is using the service")
-<<<<<<< HEAD
                 return render_template('index.html', club_name=Cname, club_length=Clength)
-=======
-                return render_template('index.html', key=key, club_name = ["SEED KAIST"], club_detail = ["Seed..."])
->>>>>>> 95d664aacc4328407b1731722072996c66f54ccb
+
             else:
                 print("password mismatch")
                 return render_template('Log_in.html', key=key)
@@ -182,11 +175,7 @@ def redirect_logout():
     key = 0
     print("key is now " + str(key))
     print("logout ends...")
-<<<<<<< HEAD
     return render_template('index.html', club_name=Cname, club_length=Clength)
-=======
-    return render_template('index.html', key=key, club_name = ["SEED KAIST"], club_detail = ["Seed..."])
->>>>>>> 95d664aacc4328407b1731722072996c66f54ccb
 
 
 @app.route("/redirect_signup")
@@ -236,12 +225,8 @@ def signup_sent(Sid, Sname, Major, Minor, Nationality, Gender, ID, PW):
         db.commit()
     finally:
         db.close()
-
-<<<<<<< HEAD
     return render_template('index.html', club_name=Cname, club_length=Clength)
-=======
-    return render_template('index.html', key=key, club_name=["SEED KAIST"], club_detail=["Seed..."])
->>>>>>> 95d664aacc4328407b1731722072996c66f54ccb
+
 
 
 if __name__ == "__main__":
