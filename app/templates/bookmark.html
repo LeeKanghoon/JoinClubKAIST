@@ -20,7 +20,7 @@
 
 							<!-- Logo -->
 							<div >
-								<a href="" class="logo">
+								<a href="/" class="logo">
 									<span class="symbol">
 										<!--img src="images/logo.svg" alt="" /-->
 										<img src="{{url_for('static', filename='images/logo_.jpg')}}"/>
@@ -90,21 +90,103 @@
 								}
 							}
 
-							var club_idx = [0, 3, 5];
-							//club_idx.split(",");
+							var club_idx = '{{club_idx}}'.split(",");
 
 
 							</script>
 
 							<div id = "myHTMLWrapper" class="inner" />
 								<script>
+
+								var img = [
+									'<img src="{{url_for("static", filename = "images/logo/1.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/2.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/3.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/4.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/5.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/6.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/7.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/8.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/9.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/10.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/11.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/12.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/13.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/14.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/15.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/16.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/17.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/18.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/19.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/20.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/21.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/22.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/23.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/24.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/25.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/26.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/27.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/28.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/29.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/30.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/31.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/32.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/33.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/34.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/35.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/36.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/37.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/38.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/39.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/40.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/41.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/42.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/43.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/44.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/45.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/46.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/47.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/48.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/49.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/50.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/51.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/52.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/53.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/54.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/55.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/56.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/57.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/58.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/59.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/60.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/61.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/62.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/63.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/64.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/65.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/66.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/67.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/68.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/69.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/70.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/71.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/72.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/73.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/74.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/75.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/76.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/77.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/78.jpg")}}"/>',
+									'<img src="{{url_for("static", filename = "images/logo/79.jpg")}}"/>',
+
+								];
 									var wrapper = document.getElementById("myHTMLWrapper");
 									var myHTML = '<section class="tiles">';
-									for (var i = 0; i < length ; i++) {
+									for (var i = 0; i < 3 ; i++) {
 
 										myHTML += '<article>'
 																				+ '<span class="image">'
-																				+ img[i]
+																				+ img[club_idx[i]]
 																				+ '</span>'
 																				+ '<a>'
 																				+ '<form method="post" action="club_info">'
@@ -118,7 +200,7 @@
 
 									myHTML += '</section>';
 
-									wrapper.innerHTML = myHTML
+									wrapper.innerHTML = myHTML;
 
 								</script>
 							</div>
