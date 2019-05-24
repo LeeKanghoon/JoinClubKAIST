@@ -74,7 +74,7 @@ def club_info():
             # Set cursor to the database
             with db.cursor() as cursor:
                 # Write SQL query
-                sql = """SELECT Cname, Class, District, Department, Establish, Num_member, Num_recruit, Activity_time, Phone, Room, Homepage, Csn
+                sql = """SELECT Cname, Class, District, Department, Establish, Num_member, Num_recruit, Activity_time, Phone, Room, Homepage, Csn, Intro
                 FROM STUDENT INNER JOIN CLUB ON STUDENT.Sid = CLUB.Csid WHERE CLUB.Csn='"""+str(club_num)+"""';"""
                 # Execute SQL
                 cursor.execute(sql)
