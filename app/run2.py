@@ -232,7 +232,7 @@ def redirect_bookmark():
             # Set cursor to the database
             with db.cursor() as cursor:
                 # Write SQL query
-                sql = """SELECT Cname, BCsn FROM BOOKMARK INNER JOIN CLUB ON BOOKMARK.BCsn = CLUB.Csn WHERE BOOKMARK.CSid='""" + str(sid) + """';"""
+                sql = """SELECT Cname, BCsn FROM BOOKMARK INNER JOIN CLUB ON BOOKMARK.BCsn = CLUB.Csn WHERE BOOKMARK.BSid='""" + str(sid) + """';"""
                 # Execute SQL
                 cursor.execute(sql)
                 # Fetch the result
@@ -245,11 +245,13 @@ def redirect_bookmark():
         print("redirect_bookmark finish")
         club_name = []
         club_idx = ""
-        club_length = length(result)
+        club_length = len(result)
         for row in result:
             club_name.append(row[0])
-            club_idx = club_idx + row[1] + ","
-        club_idx = club_idx[:, -1]
+            club_idx = club_idx + str(row[1]) + ","
+        club_idx = club_idx[:-1]
+        print(club_name)
+        print(club_idx)
         return render_template('bookmark.html', key=key, club_name=club_name, club_idx=club_idx, club_length=club_length)
 
 @app.route("/bookmark")
