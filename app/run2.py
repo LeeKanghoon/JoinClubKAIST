@@ -11,7 +11,6 @@ sid = 0
 
 app = Flask(__name__)
 # retrieve the Cname, Csn  from db
-
 print("DB retrieve starts...")
 db = pymysql.connect(host='143.248.192.100',
                      port=3306,
@@ -49,8 +48,8 @@ print(Cname)
 def index1():
     print("Application starts...")
     print("initialized key is " + str(key))
-    #return render_template('index.html', club_name = ["SEED KAIST", "hihi", "...........!!"], club_length = 79)
-    return render_template('index.html', club_name=Cname, club_length=Clength)
+    return render_template('index.html', club_name = ["SEED KAIST", "hihi", "...........!!"], club_length = 79)
+    #return render_template('index.html', club_name=Cname, club_length=Clength)
 
 @app.route("/index")
 def index2():
@@ -62,6 +61,8 @@ def club_info():
     if request.method == 'POST':
         print("method starts...")
         club_name = request.form['club_name']
+        csn = int(request.form['club_num'])
+        print(csn)
         print(club_name)
         # retrieve the club_info from db
         print("DB retrieve starts...")
