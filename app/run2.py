@@ -122,18 +122,44 @@ def club_info():
         for row_ in result:
             bookmark_list.append(row_[0])
         print(bookmark_list)
-    if row[11] in bookmark_list:
-        print("the club is already in bookmark list")
-        bookmark_v = 1;
-    else:
-        print("the club is not in bookmark list")
-        bookmark_v = 0;
+        if row[11] in bookmark_list:
+            print("the club is already in bookmark list")
+            bookmark_v = 1
+        else:
+            print("the club is not in bookmark list")
+            bookmark_v = 0
     print("bookmark_info finish")
 
     return render_template('generic.html', club_name=row[0], class_=row[1], district=row[2], department=row[3], establish=row[4],
                            club_member=row[5], recruit_member=row[6], activity_time=row[7], phone=row[8], location=row[9], homepage=row[10], cnum=row[11], cinfo=row[12],
                            key=key, bookmark_v=bookmark_v)
 
+@app.route("/bookmark_modify", methods = ['POST'])
+def bookmark_modify():
+    global sid;
+    BCsn = 3
+    print("bookmark_modify start")
+    if request.method == 'POST':
+        print("method starts...")
+        bookmark_check = request.form['bookmark_check'] # bookmark_check == 1 put in bookmark, bookmark_check == 0 eliminate from bookmark
+        # retrieve the club_info from db
+        print("DB retrieve starts...")
+        db = pymysql.connect(host='localhost',
+                             port=3306,
+                             user='root',
+                             passwd='junmo12345',
+                             db='joinclubkaist',
+                             charset='utf8')
+        try:
+            # Set cursor to the database
+            with db.cursor() as cursor:
+                sql = """INSERT INTO BOOKMARK VALUES('""" + BCsn + """', '""" + sid + """');"""
+                cursor.execute(sql)
+            db.commit()
+        finally:
+            db.close()
+        print("DB retrieve ends...")
+    print("bookmark_modify finish")
 
 @app.route("/aboutus")
 def aboutus():
