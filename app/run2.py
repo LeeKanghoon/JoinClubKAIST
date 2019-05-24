@@ -10,7 +10,6 @@ Clength = 0
 sid = 0
 
 app = Flask(__name__)
-
 # retrieve the Cname, Csn  from db
 print("DB retrieve starts...")
 db = pymysql.connect(host='localhost',
