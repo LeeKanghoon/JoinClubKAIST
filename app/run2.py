@@ -216,10 +216,9 @@ def bookmark_delete():
             db.close()
         print("DB update ends...")
     print("bookmark_delete finish")
-    return return render_template('generic.html', club_name=club_name, class_=class_, district=district, department=department, establish=establish,
+    return render_template('generic.html', club_name=club_name, class_=class_, district=district, department=department, establish=establish,
                            club_member=club_member, recruit_member=recruit_member, activity_time=activity_time, phone=phone, location=location, homepage=homepage,
-                            cnum=cnum, cinfo=cinfo,
-                           key=key, bookmark_v=0)
+                            cnum=cnum, cinfo=cinfo, key=key, bookmark_v=0)
 
 @app.route("/aboutus")
 def aboutus():

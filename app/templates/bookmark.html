@@ -182,7 +182,7 @@
 								];
 									var wrapper = document.getElementById("myHTMLWrapper");
 									var myHTML = '<section class="tiles">';
-									for (var i = 0; i < 3 ; i++) {
+									for (var i = 0; i < length ; i++) {
 
 										myHTML += '<article>'
 																				+ '<span class="image">'
@@ -190,7 +190,7 @@
 																				+ '</span>'
 																				+ '<a>'
 																				+ '<form method="post" action="club_info">'
-																				+ '<input type = "hidden" name = "club_num" value = '+(i+1)+'>'
+																				+ '<input type = "hidden" name = "club_num" value = '+club_idx[i]+'>'
 																				+ '<h2><input type="submit" name="club_name" value='+club_name3[i]+' class="primary"/></h2>'
 																				+ '</form>'
 																				+ '<div class="content">'

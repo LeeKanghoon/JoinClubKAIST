@@ -71,8 +71,7 @@
 								{% if (bookmark_v == 0) %}
 									<form method="post" action="bookmark_insert">
 									<input type = "hidden" name = "csn" value = {{cnum}}>
-
-									<input type = "hidden" name = "club_name" value = {{club_name}}>
+									<input type = "hidden" name = "club_name" value = "{{ club_name }}">
 									<input type = "hidden" name = "class_" value = {{class_}}>
 									<input type = "hidden" name = "district" value = {{district}}>
 									<input type = "hidden" name = "department" value = {{department}}>
@@ -92,8 +91,8 @@
 									<form method="post" action="bookmark_delete">
 									<input type = "hidden" name = "csn" value = {{cnum}}>
 
-									<input type = "hidden" name = "club_name" value = {{club_name}}>
-									<input type = "hidden" name = "class" value = {{class}}>
+									<input type = "hidden" name = "club_name" value = "{{ club_name }}">
+									<input type = "hidden" name = "class_" value = {{class_}}>
 									<input type = "hidden" name = "district" value = {{district}}>
 									<input type = "hidden" name = "department" value = {{department}}>
 									<input type = "hidden" name = "establish" value = {{establish}}>
