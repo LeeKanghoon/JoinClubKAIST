@@ -13,9 +13,9 @@ app = Flask(__name__)
 # retrieve the Cname, Csn  from db
 '''
 print("DB retrieve starts...")
-db = pymysql.connect(host='143.248.192.100',
+db = pymysql.connect(host='localhost',
                      port=3306,
-                     user='junmo',
+                     user='root',
                      passwd='junmo12345',
                      db='joinclubkaist',
                      charset='utf8')
@@ -49,8 +49,8 @@ print(Cname)
 def index1():
     print("Application starts...")
     print("initialized key is " + str(key))
-    return render_template('index.html', club_name = ["SEED KAIST", "hihi", "...........!!"], club_length = 79)
-    #return render_template('index.html', club_name=Cname, club_length=Clength)
+    #return render_template('index.html', club_name = ["SEED KAIST", "hihi", "...........!!"], club_length = 79)
+    return render_template('index.html', club_name=Cname, club_length=Clength)
 
 @app.route("/index")
 def index2():
@@ -62,9 +62,7 @@ def club_info():
     if request.method == 'POST':
         print("method starts...")
         club_name = request.form['club_name']
-        csn = int(request.form['club_num'])
-        print(csn)
-        print(club_name)
+        club_num = request.form['club_num']
         # retrieve the club_info from db
         print("DB retrieve starts...")
         db = pymysql.connect(host='localhost',
@@ -77,7 +75,8 @@ def club_info():
             # Set cursor to the database
             with db.cursor() as cursor:
                 # Write SQL query
-                sql = """SELECT Cname, Class, District, Department, Department, Establish, Num_member, Num_recruit, Activity_time, Homepage, Room, Phone FROM CLUB NATURAL JOIN STUDENT;"""
+                sql = """SELECT Cname, Class, District, Department, Establish, Num_member, Num_recruit, Activity_time, Phone, Room, Homepage, Csn
+                FROM STUDENT INNER JOIN CLUB ON STUDENT.Sid = CLUB.Csid WHERE CLUB.Csn='"""+str(club_num)+"""';"""
                 # Execute SQL
                 cursor.execute(sql)
                 # Fetch the result
@@ -86,9 +85,9 @@ def club_info():
         finally:
             db.close()
         print("DB retrieve ends...")
-
-    print(result[0])
-    return render_template('generic.html', club_name = "SEED KAIST", club_member = 30, recruit_member = 10, activity_time = "10:30~11:30", phone = "010-6606-7459", location = "N12-1 #302", homepage = "https://cafe.naver.com/seedkaist", cnum = 1)
+    row = result[0]
+    return render_template('generic.html', club_name=row[0], class_=row[1], district=row[2], department=row[3], establish=row[4],
+                           club_member=row[5], recruit_member=row[6], activity_time=row[7], phone=row[8], location=row[9], homepage=row[10], cnum=row[11])
 
 
 @app.route("/aboutus")
