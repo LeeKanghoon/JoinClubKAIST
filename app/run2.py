@@ -58,6 +58,7 @@ def index2():
 
 @app.route("/club_info", methods = ['POST'])
 def club_info():
+
     return render_template('generic.html')
 
 @app.route("/aboutus")
