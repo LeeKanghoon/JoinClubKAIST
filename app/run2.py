@@ -12,9 +12,9 @@ sid = 0
 app = Flask(__name__)
 # retrieve the Cname, Csn  from db
 print("DB retrieve starts...")
-db = pymysql.connect(host='localhost',
+db = pymysql.connect(host='143.248.192.100',
                      port=3306,
-                     user='root',
+                     user='junmo',
                      passwd='junmo12345',
                      db='joinclubkaist',
                      charset='utf8')
@@ -44,12 +44,12 @@ for ind, csn in enumerate(Csn):
     Cname[csn-1] = Cname_temp[ind]
 print(Cname)
 
-
 @app.route("/")
 def index1():
     print("Application starts...")
     print("initialized key is " + str(key))
-    return render_template('index.html', club_name=Cname, club_length=Clength)
+    return render_template('index.html', club_name = ["SEED KAIST", "hihi", "...........!!"], club_length = 79)
+    #return render_template('index.html', club_name=Cname, club_length=Clength)
 
 @app.route("/index")
 def index2():
@@ -61,7 +61,8 @@ def club_info():
     if request.method == 'POST':
         print("method starts...")
         club_name = request.form['club_name']
-        club_num = str(1);
+        csn = int(request.form['club_num'])
+        print(csn)
         print(club_name)
         # retrieve the club_info from db
         print("DB retrieve starts...")
