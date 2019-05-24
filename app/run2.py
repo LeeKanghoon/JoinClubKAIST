@@ -10,11 +10,7 @@ app = Flask(__name__)
 def index1():
     print("Application starts...")
     print("initialized key is " + str(key))
-<<<<<<< HEAD
     return render_template('index.html', club_name = ["SEED KAIST", "hihi", "...........!!"], club_length = 5)
-=======
-    return render_template('index.html', key=key, club_name = ["SEED KAIST"], club_detail = ["Seed..."])
->>>>>>> 95d664aacc4328407b1731722072996c66f54ccb
 
 @app.route("/index")
 def index2():

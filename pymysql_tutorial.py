@@ -22,9 +22,9 @@ try:
     # Set cursor to the database
     with db.cursor() as cursor:
         # Write SQL query
-            sql = """LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/club_db.csv' 
+            sql = """LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/club_db_final.csv' 
                     INTO TABLE CLUB FIELDS TERMINATED BY ','
-                    (Cname, Csn, @Class, @District, @Department, @Establish, @Num_member, @Num_recruit, @Activity_time, @Phone, @Homepage, @Room, @CSid)
+                    (Cname, Csn, @Class, @District, @Department, @Establish, @Num_member, @Num_recruit, @Activity_time, @Homepage, @Room, @CSid)
                     SET
                     Class = nullif(@Class, ''),
                     District = nullif(@District, ''),
@@ -33,7 +33,6 @@ try:
                     Num_member = nullif(@Num_member, ''),
                     Num_recruit = nullif(@Num_recruit, ''),
                     Activity_time = nullif(@Activity_time, ''),
-                    Phone = nullif(@Phone, ''),
                     Homepage = nullif(@Homepage, ''),
                     Room = nullif(@Room, ''),
                     CSid = nullif(@CSid, '');
