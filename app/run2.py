@@ -2,8 +2,13 @@ from flask import Flask, render_template, redirect, url_for, request
 import pymysql
 
 global key
-key = 0
 global sid
+global Cname
+global Clength
+key = 0
+Clength = 0
+sid = 0
+
 app = Flask(__name__)
 
 @app.route("/")
@@ -94,7 +99,8 @@ def login():
                 sid = row[0]
                 print("key is now " + str(key))
                 print(str(sid) + " is using the service")
-                return render_template('index.html', key=key, club_name = ["SEED KAIST"], club_detail = ["Seed..."])
+                return render_template('index.html', club_name=Cname, club_length=Clength)
+
             else:
                 print("password mismatch")
                 return render_template('Log_in.html', key=key)
@@ -109,7 +115,7 @@ def redirect_logout():
     key = 0
     print("key is now " + str(key))
     print("logout ends...")
-    return render_template('index.html', key=key, club_name = ["SEED KAIST"], club_detail = ["Seed..."])
+    return render_template('index.html', club_name=Cname, club_length=Clength)
 
 
 @app.route("/redirect_signup")
@@ -159,8 +165,8 @@ def signup_sent(Sid, Sname, Major, Minor, Nationality, Gender, ID, PW):
         db.commit()
     finally:
         db.close()
+    return render_template('index.html', club_name=Cname, club_length=Clength)
 
-    return render_template('index.html', key=key, club_name=["SEED KAIST"], club_detail=["Seed..."])
 
 
 if __name__ == "__main__":
