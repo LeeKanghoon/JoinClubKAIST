@@ -134,16 +134,15 @@ def club_info():
                            club_member=row[5], recruit_member=row[6], activity_time=row[7], phone=row[8], location=row[9], homepage=row[10], cnum=row[11], cinfo=row[12],
                            key=key, bookmark_v=bookmark_v)
 
-@app.route("/bookmark_modify", methods = ['POST'])
-def bookmark_modify():
+@app.route("/bookmark_insert", methods = ['POST'])
+def bookmark_insert():
     global sid;
-    BCsn = 3
-    print("bookmark_modify start")
+    print("bookmark_insert start")
     if request.method == 'POST':
         print("method starts...")
-        bookmark_check = request.form['bookmark_check'] # bookmark_check == 1 put in bookmark, bookmark_check == 0 eliminate from bookmark
+        csn = request.form['csn']
         # retrieve the club_info from db
-        print("DB retrieve starts...")
+        print("DB update starts...")
         db = pymysql.connect(host='localhost',
                              port=3306,
                              user='root',
@@ -153,13 +152,41 @@ def bookmark_modify():
         try:
             # Set cursor to the database
             with db.cursor() as cursor:
-                sql = """INSERT INTO BOOKMARK VALUES('""" + BCsn + """', '""" + sid + """');"""
+                sql = """INSERT INTO BOOKMARK VALUES('""" + str(csn) + """', '""" + str(sid) + """');"""
                 cursor.execute(sql)
             db.commit()
         finally:
             db.close()
-        print("DB retrieve ends...")
-    print("bookmark_modify finish")
+        print("DB update ends...")
+    print("bookmark_insert finish")
+    return club_info()
+
+@app.route("/bookmark_delete", methods = ['POST'])
+def bookmark_delete():
+    global sid;
+    print("bookmark_delete start")
+    if request.method == 'POST':
+        print("method starts...")
+        csn = request.form['csn']
+        # retrieve the club_info from db
+        print("DB update starts...")
+        db = pymysql.connect(host='localhost',
+                             port=3306,
+                             user='root',
+                             passwd='junmo12345',
+                             db='joinclubkaist',
+                             charset='utf8')
+        try:
+            # Set cursor to the database
+            with db.cursor() as cursor:
+                sql = """DELETE FROM BOOKMARK WHERE BOOKMARK.BCsn='"""+str(csn)+"""' AND BOOKMARK.BSid='"""+str(sid)+"""';"""
+                cursor.execute(sql)
+            db.commit()
+        finally:
+            db.close()
+        print("DB update ends...")
+    print("bookmark_delete finish")
+    return club_info()
 
 @app.route("/aboutus")
 def aboutus():
