@@ -142,7 +142,7 @@ def login():
             # Set cursor to the database
             with db.cursor() as cursor:
                 # Write SQL query
-                sql = """SELECT Sid, ID, Password FROM STUDENT WHERE ID = '""" + id + """';"""
+                sql = """SELECT Sid, ID, PW FROM STUDENT WHERE ID = '""" + id + """';"""
                 # Execute SQL
                 cursor.execute(sql)
                 # Fetch the result
@@ -154,11 +154,10 @@ def login():
         if not result: # dictionary is empty
             print("no matching ID")
         else:
-            for row in result:  # should be only one ((Sid, id, pw),)
-                real_id = row[1]
-                real_pw = row[2]
-                print(row[0], row[1], row[2])
-            if (id == real_id) and (pw == real_pw):
+            row = result[0]
+            pw_ = row[2]
+            pw_ = pw_[:-1]
+            if (id == row[1]) and (pw == pw_):
                 print("key is now " + str(key))
                 key = 1
                 sid = row[0]
