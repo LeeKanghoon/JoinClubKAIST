@@ -2,36 +2,96 @@ from flask import Flask, render_template, redirect, url_for, request
 import pymysql
 
 global key
+global sid
+global Cname
+global Clength
 key = 0
+Clength = 0
+sid = 0
+
 app = Flask(__name__)
+
 
 @app.route("/")
 def index1():
-    print("here!!")
-    return render_template('index.html')
+    print("Application starts...")
+    print("initialized key is " + str(key))
+    return render_template('index.html', club_name = ["SEED KAIST", "hihi", "...........!!"], club_length = 79)
+    #return render_template('index.html', club_name=Cname, club_length=Clength)
 
 @app.route("/index")
 def index2():
-    return render_template('index.html')
+    return render_template('index.html', club_name=Cname, club_length=Clength)
 
-@app.route("/generic")
-def generic():
-    print("generic here!!")
-    return render_template('generic.html')
+@app.route("/club_info", methods = ['POST'])
+def club_info():
+    print("club_info start")
+    if request.method == 'POST':
+        print("method starts...")
+        club_name = request.form['club_name']
+        club_num = request.form['club_num']
+        # retrieve the club_info from db
+        print("DB retrieve starts...")
+        db = pymysql.connect(host='localhost',
+                             port=3306,
+                             user='root',
+                             passwd='junmo12345',
+                             db='joinclubkaist',
+                             charset='utf8')
+        try:
+            # Set cursor to the database
+            with db.cursor() as cursor:
+                # Write SQL query
+                sql = """SELECT Cname, Class, District, Department, Establish, Num_member, Num_recruit, Activity_time, Phone, Room, Homepage, Csn
+                FROM STUDENT INNER JOIN CLUB ON STUDENT.Sid = CLUB.Csid WHERE CLUB.Csn='"""+str(club_num)+"""';"""
+                # Execute SQL
+                cursor.execute(sql)
+                # Fetch the result
+                # result is dictionary type
+                result = cursor.fetchall()
+        finally:
+            db.close()
+        print("DB retrieve ends...")
+    row = result[0]
+    return render_template('generic.html', club_name=row[0], class_=row[1], district=row[2], department=row[3], establish=row[4],
+                           club_member=row[5], recruit_member=row[6], activity_time=row[7], phone=row[8], location=row[9], homepage=row[10], cnum=row[11])
 
-@app.route("/elements")
-def elements():
-    print("elements here!!")
-    return render_template('elements.html')
+
+@app.route("/aboutus")
+def aboutus():
+    print("aboutus here!!")
+    return render_template('aboutus.html', key=key)
+
+@app.route("/redirect_bookmark")
+def redirect_bookmark():
+    global key
+    global sid
+    if key == 0:
+        # alert
+        print("need to login")
+        return render_template('Log_in.html', key=key, club_name = ["SEED KAIST"], club_detail = ["Seed..."])
+    else:
+        return render_template('bookmark.html', key=key)
+
+@app.route("/bookmark")
+def bookmark():
+    print("bookmark here!!")
+    return render_template('bookmark.html', key=key)
+
+@app.route("/interested")
+def interested():
+    print("interest here!!")
+    return render_template('interested.html')
 
 @app.route("/redirect_login")
 def redirect_login():
     print("login here!!")
-    return render_template('Log_in.html')
+    return render_template('Log_in.html', key=key)
 
 @app.route("/login", methods = ['POST'])
 def login():
     global key # will use global key variable
+    global sid
     print("login start")
     if request.method == 'POST':
         print("method starts...")
@@ -49,7 +109,7 @@ def login():
             # Set cursor to the database
             with db.cursor() as cursor:
                 # Write SQL query
-                sql = """SELECT ID, Password FROM STUDENT WHERE ID = '""" + id + """';"""
+                sql = """SELECT Sid, ID, Password FROM STUDENT WHERE ID = '""" + id + """';"""
                 # Execute SQL
                 cursor.execute(sql)
                 # Fetch the result
@@ -61,20 +121,40 @@ def login():
         if not result: # dictionary is empty
             print("no matching ID")
         else:
-            for row in result:  # should be only one ((id, pw),)
-                real_id = row[0]
-                real_pw = row[1]
-            if (id == real_id) and (pw==real_pw):
-                print(key)
+            for row in result:  # should be only one ((Sid, id, pw),)
+                real_id = row[1]
+                real_pw = row[2]
+                print(row[0], row[1], row[2])
+            if (id == real_id) and (pw == real_pw):
+                print("key is now " + str(key))
                 key = 1
-                print(key)
-                return redirect("/index")
+                sid = row[0]
+                print("key is now " + str(key))
+                print(str(sid) + " is using the service")
+                return render_template('index.html', club_name=Cname, club_length=Clength)
+
+            else:
+                print("password mismatch")
+                return render_template('Log_in.html', key=key)
+
+
+
+
+@app.route("/redirect_logout")
+def redirect_logout():
+    print("logout starts...")
+    global key
+    key = 0
+    print("key is now " + str(key))
+    print("logout ends...")
+    return render_template('index.html', club_name=Cname, club_length=Clength)
 
 
 @app.route("/redirect_signup")
 def redirect_signup():
     print("signup here!!")
-    return render_template('Sign_up.html')
+    return render_template('Sign_up.html', key=key)
+
 
 @app.route("/signup", methods = ['POST'])
 def signup():
@@ -100,7 +180,7 @@ def signup_sent(Sid, Sname, Major, Minor, Nationality, Gender, ID, PW):
     db = pymysql.connect(host='localhost',
                          port=3306,
                          user='root',
-                         passwd='rkdgns7549!!',
+                         passwd='junmo12345',
                          db='joinclubkaist',
                          charset='utf8')
     try:
@@ -117,8 +197,8 @@ def signup_sent(Sid, Sname, Major, Minor, Nationality, Gender, ID, PW):
         db.commit()
     finally:
         db.close()
+    return render_template('index.html', club_name=Cname, club_length=Clength)
 
-    return redirect("/index")
 
 
 if __name__ == "__main__":
