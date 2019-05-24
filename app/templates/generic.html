@@ -70,12 +70,42 @@
 							{% if (key == 1) %}
 								{% if (bookmark_v == 0) %}
 									<form method="post" action="bookmark_insert">
-									<input type = "hidden" name = "csn" value = {{ cnum }}>
+									<input type = "hidden" name = "csn" value = {{cnum}}>
+
+									<input type = "hidden" name = "club_name" value = {{club_name}}>
+									<input type = "hidden" name = "class_" value = {{class_}}>
+									<input type = "hidden" name = "district" value = {{district}}>
+									<input type = "hidden" name = "department" value = {{department}}>
+									<input type = "hidden" name = "establish" value = {{establish}}>
+									<input type = "hidden" name = "club_member" value = {{club_member}}>
+									<input type = "hidden" name = "recruit_member" value = {{recruit_member}}>
+									<input type = "hidden" name = "activity_time" value = {{activity_time}}>
+									<input type = "hidden" name = "phone" value = {{phone}}>
+									<input type = "hidden" name = "location" value = {{location}}>
+									<input type = "hidden" name = "homepage" value = {{homepage}}>
+									<input type = "hidden" name = "cnum" value = {{cnum}}>
+									<input type = "hidden" name = "cinfo" value = {{cinfo}}>
+
 									<h2><input type="submit" name="bookmark" class="primary" value="bookmark" /></h2>
 									</form>
 								{% else %}
 									<form method="post" action="bookmark_delete">
-									<input type = "hidden" name = "csn" value = {{ cnum }}>
+									<input type = "hidden" name = "csn" value = {{cnum}}>
+
+									<input type = "hidden" name = "club_name" value = {{club_name}}>
+									<input type = "hidden" name = "class" value = {{class}}>
+									<input type = "hidden" name = "district" value = {{district}}>
+									<input type = "hidden" name = "department" value = {{department}}>
+									<input type = "hidden" name = "establish" value = {{establish}}>
+									<input type = "hidden" name = "club_member" value = {{club_member}}>
+									<input type = "hidden" name = "recruit_member" value = {{recruit_member}}>
+									<input type = "hidden" name = "activity_time" value = {{activity_time}}>
+									<input type = "hidden" name = "phone" value = {{phone}}>
+									<input type = "hidden" name = "location" value = {{location}}>
+									<input type = "hidden" name = "homepage" value = {{homepage}}>
+									<input type = "hidden" name = "cnum" value = {{cnum}}>
+									<input type = "hidden" name = "cinfo" value = {{cinfo}}>
+
 									<h2><input type="submit" name="bookmark" class="primary" value="bookmarked" /></h2>
 									</form>
 								{% endif %}
