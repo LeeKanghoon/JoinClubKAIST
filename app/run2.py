@@ -49,15 +49,43 @@ print(Cname)
 def index1():
     print("Application starts...")
     print("initialized key is " + str(key))
-    return render_template('index.html', club_name = ["SEED KAIST", "hihi", "...........!!"], club_length = 79)
+    #return render_template('index.html', club_name = ["SEED KAIST", "hihi", "...........!!"], club_length = 79)
+    return render_template('index.html', club_name=Cname, club_length=Clength)
 
 @app.route("/index")
 def index2():
-    return render_template('index.html', key=key, club_name = ["SEED KAIST"], club_detail = ["Seed..."])
+    return render_template('index.html', club_name=Cname, club_length=Clength)
 
 @app.route("/club_info", methods = ['POST'])
 def club_info():
+    print("club_info start")
+    if request.method == 'POST':
+        print("method starts...")
+        club_name = request.form['club_name']
+        print(club_name)
+        # retrieve the club_info from db
+        print("DB retrieve starts...")
+        db = pymysql.connect(host='localhost',
+                             port=3306,
+                             user='root',
+                             passwd='junmo12345',
+                             db='joinclubkaist',
+                             charset='utf8')
+        try:
+            # Set cursor to the database
+            with db.cursor() as cursor:
+                # Write SQL query
+                sql = """SELECT Cname, Class, District, Department, Department, Establish, Num_member, Num_recruit, Activity_time, Homepage, Room, Phone FROM CLUB NATURAL JOIN STUDENT;"""
+                # Execute SQL
+                cursor.execute(sql)
+                # Fetch the result
+                # result is dictionary type
+                result = cursor.fetchall()
+        finally:
+            db.close()
+        print("DB retrieve ends...")
 
+    print(result[0])
     return render_template('generic.html', club_name = "SEED KAIST", club_member = 30, recruit_member = 10, activity_time = "10:30~11:30", phone = "010-6606-7459", location = "N12-1 #302", homepage = "https://cafe.naver.com/seedkaist", cnum = 1)
 
 

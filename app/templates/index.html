@@ -209,7 +209,7 @@ Explore your campus life with us!</p>
 									var myHTML = '<section class="tiles">';
 									for (var i = 0; i < length ; i++) {
 
-										myHTML += 					'<article>'
+										myHTML += '<article>'
                                         + '<span class="image">'
 																				+ img[i]
 
@@ -217,11 +217,10 @@ Explore your campus life with us!</p>
                                         + '<a>'
                                         + '<form method="post" action="club_info">'
                                         + '<h2><input type="submit" name="club_name" value='+club_name3[i]+' class="primary"/></h2>'
-										 									+ '</form>'
-                                      + '<div class="content">'
-										 									+ '<p>'+club_name3[i]+'</p>'
-										 								+ '</div></a></article>';
-
+                                        + '</form>'
+                                        + '<div class="content">'
+                                        + '<p>'+club_name3[i]+'</p>'
+                                        + '</div></a></article>';
 									}
 
 									myHTML += '</section>';
