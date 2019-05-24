@@ -11,78 +11,18 @@ sid = 0
 
 app = Flask(__name__)
 
-db = pymysql.connect(host='localhost',
-                         port=3306,
-                         user='root',
-                         passwd='junmo12345',
-                         db='joinclubkaist',
-                         charset='utf8')
-try:
-    # Set cursor to the database
-    with db.cursor() as cursor:
-        # Write SQL query
-        sql = """SELECT Csn, Cname FROM CLUB;"""
-        # Execute SQL
-        cursor.execute(sql)
-        # Fetch the result
-        # result is dictionary type
-        result = cursor.fetchall()
-finally:
-    db.close()
-print("DB retrieve ends...")
-Csn = []
-Cname = ["" for x in range(len(result))]
-Cname_temp = []
-for row in result:
-    Csn.append(row[0])
-    Cname_temp.append(str(row[1]))
-i = 0
-for csn in Csn:
-    Cname[csn-1] = Cname_temp[i]
-    i += 1
-Clength = i
-print("Cname is " + str(Cname))
-
-
 @app.route("/")
 def index1():
     print("Application starts...")
     print("initialized key is " + str(key))
-    return render_template('index.html', club_name=Cname, club_length=Clength)
+    return render_template('index.html', club_name = ["SEED KAIST", "hihi", "...........!!"], club_length = 5)
 
 @app.route("/index")
 def index2():
-    return render_template('index.html', club_name=Cname, club_length=Clength)
+    return render_template('index.html', key=key, club_name = ["SEED KAIST"], club_detail = ["Seed..."])
 
 @app.route("/club_info", methods = ['POST'])
 def club_info():
-    if request.method == 'POST':
-        print("method starts...")
-        club_name = request.form['club_name']
-        print(str(club_name) + " : the club info we want to retrieve")
-        # retrieve the club info from db
-        print("DB retrieve starts...")
-        db = pymysql.connect(host='localhost',
-                             port=3306,
-                             user='root',
-                             passwd='junmo12345',
-                             db='joinclubkaist',
-                             charset='utf8')
-        try:
-            # Set cursor to the database
-            with db.cursor() as cursor:
-                # Write SQL query
-                sql = """SELECT * FROM CLUB NATURAL JOIN STUDENT;"""
-                # Execute SQL
-                cursor.execute(sql)
-                # Fetch the result
-                # result is dictionary type
-                result = cursor.fetchall()
-        finally:
-            db.close()
-        print("DB retrieve ends...")
-        print(result)
-
     return render_template('generic.html')
 
 @app.route("/aboutus")
