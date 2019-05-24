@@ -61,6 +61,7 @@ def club_info():
     if request.method == 'POST':
         print("method starts...")
         club_name = request.form['club_name']
+        club_num = str(1);
         print(club_name)
         # retrieve the club_info from db
         print("DB retrieve starts...")
@@ -74,7 +75,7 @@ def club_info():
             # Set cursor to the database
             with db.cursor() as cursor:
                 # Write SQL query
-                sql = """SELECT Cname, Class, District, Department, Department, Establish, Num_member, Num_recruit, Activity_time, Homepage, Room, Phone FROM CLUB NATURAL JOIN STUDENT;"""
+                sql = """SELECT * FROM STUDENT INNER JOIN CLUB ON STUDENT.Sid = CLUB.Csid WHERE CLUB.Csn='"""+club_num+"""';"""
                 # Execute SQL
                 cursor.execute(sql)
                 # Fetch the result
@@ -83,8 +84,7 @@ def club_info():
         finally:
             db.close()
         print("DB retrieve ends...")
-
-    print(result[0])
+    print(result)
     return render_template('generic.html', club_name = "SEED KAIST", club_member = 30, recruit_member = 10, activity_time = "10:30~11:30", phone = "010-6606-7459", location = "N12-1 #302", homepage = "https://cafe.naver.com/seedkaist", cnum = 1)
 
 
