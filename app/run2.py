@@ -299,14 +299,34 @@ def redirect_event():
         finally:
             db.close()
         print("DB retrieve ends...")
-        print(result)
         print("redirect_event finish")
         event_time = []
         for row in result:
             event_time.append(int(row[2]+row[3]))
-        print(event_time)
         event_sort = [i[0] for i in sorted(enumerate(event_time), key=lambda x:x[1])] #event time sorted index
-        return render_template('event.html')
+        length = len(result)
+        Eno = []
+        Ename = []
+        Edate = []
+        Time = []
+        Loc = []
+        Cname = []
+        for i in event_sort:
+            row = result[i]
+            Eno.append(str(row[0]))
+            Ename.append(row[1])
+            edate = row[2]
+            edate = edate[:4] + ' / ' + edate[4:6] + ' / ' + edate[6:8]
+            Edate.append(edate)
+            stime = row[3]
+            etime = row[4]
+            stime = stime[:2] + ':' + stime[2:4]
+            etime = etime[:2] + ':' + etime[2:4]
+            Time.append(stime + ' ~ ' + etime)
+            Loc.append(row[5])
+            Cname.append(row[6])
+        return render_template('event.html', key=key, club_name=Cname, event_name=Ename, date=Edate, time=Time,
+                               location=Loc, length=length)
 
 @app.route("/redirect_login")
 def redirect_login():
