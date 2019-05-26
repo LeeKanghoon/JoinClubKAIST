@@ -292,7 +292,24 @@ def interest_insert():
         print(date)
         print(time)
         print(location)
-        
+
+        event_v = event_v[1:-1].split(",")
+        event_num = event_num[1:-1].split(",")
+        club_name = club_name[1:-1].split(",")
+        event_name = event_name[1:-1].split(",")
+        date = date[1:-1].split(",")
+        time = time[1:-1].split(",")
+        location = location[1:-1].split(",")
+
+        for i in range(len(event_v)):
+            event_v[i] = event_v[i][1:-1]
+            event_num[i] = event_num[i][1:-1]
+            club_name[i] = club_name[i][1:-1]
+            event_name[i] = event_name[i][1:-1]
+            date[i] = date[i][1:-1]
+            time[i] = time[i][1:-1]
+            location[i] = location[i][1:-1]
+
 
         index = int(index)
         event_v[index] = '1'
