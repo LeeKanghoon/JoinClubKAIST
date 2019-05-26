@@ -281,8 +281,14 @@ def redirect_bookmark():
             # Set cursor to the database
             with db.cursor() as cursor:
                 # Write SQL query
-                sql = """SELECT Eno, Ename, Edate, Stime, Etime, Loc, Cname FROM EVENT INNER JOIN INTEREST
-                ON EVENT.Eno = INTEREST.IEno WHERE INTEREST.ISid='""" + str(sid) + """';"""
+                sql = """SELECT Eno, Ename, Edate, Stime, Etime, Loc, Cname 
+                FROM EVENT 
+                INNER JOIN INTEREST 
+                ON EVENT.Eno = INTEREST.IEno 
+                INNER JOIN CLUB  
+                ON EVENT.ECsn = CLUB.Csn 
+                WHERE INTEREST.ISid='""" + str(sid) + """';"""
+
                 # Execute SQL
                 cursor.execute(sql)
                 # Fetch the result
@@ -290,6 +296,7 @@ def redirect_bookmark():
                 result = cursor.fetchall()
         finally:
             db.close()
+        print(result)
         print("DB retrieve ends...")
         print("redirect_bookmark_interest finish")
         event_time = []
@@ -318,7 +325,8 @@ def redirect_bookmark():
             Loc.append(row[5])
             Cname.append(row[6])
         return render_template('bookmark.html', key=key, club_name=club_name, club_idx=club_idx, club_length=club_length,   # for club bookmark
-                               event_num=Eno, event_name=Ename, date=Edate, time=Time, location=Loc, length=length) # for event bookmark
+                               event_num=Eno, e_club_name=Cname, event_name=Ename, date=Edate, time=Time, location=Loc, length=length)         # for event bookmark
+
 
 @app.route("/interest_insert", methods = ['POST'])
 def interest_insert():
