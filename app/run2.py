@@ -362,14 +362,16 @@ def signup():
         minor = request.form['minor']
         nationality = request.form['nationality']
         gender = request.form['gender']
+        phone = request.form['phone']
         id = request.form['ID']
         pw = request.form['PW']
 
         print("method ends...")
-        return redirect(url_for('signup_sent', Sid=sid, Sname=sname, Major=major, Minor=minor, Nationality=nationality, Gender=gender, ID=id, PW=pw))
+        return redirect(url_for('signup_sent', Sid=sid, Sname=sname, Major=major, Minor=minor, Nationality=nationality,
+                                Gender=gender, Phone=phone, ID=id, PW=pw))
 
-@app.route("/signup_sent/<Sid>/<Sname>/<Major>/<Minor>/<Nationality>/<Gender>/<ID>/<PW>")
-def signup_sent(Sid, Sname, Major, Minor, Nationality, Gender, ID, PW):
+@app.route("/signup_sent/<Sid>/<Sname>/<Major>/<Minor>/<Nationality>/<Gender>/<Phone>/<ID>/<PW>")
+def signup_sent(Sid, Sname, Major, Minor, Nationality, Gender, Phone, ID, PW):
     # Connect to database
     print("signup_sent start ..")
     db = pymysql.connect(host='localhost',
@@ -384,7 +386,7 @@ def signup_sent(Sid, Sname, Major, Minor, Nationality, Gender, ID, PW):
             # Write SQL query
             print("SQL student insert begins")
             sql = """INSERT INTO STUDENT
-                     VALUES('""" + Sname + """', """ + Sid + """, '""" + Major + """', '""" + Minor + """', '""" + Nationality + """', '""" + Gender + """', '""" + ID + """', '""" + PW + """');"""
+                     VALUES('""" + Sname + """', """ + Sid + """, '""" + Major + """', '""" + Minor + """', '""" + Nationality + """', '""" + Gender + """', '""" + Phone + """', '""" + ID + """', '""" + PW + """');"""
             # Execute SQL
             cursor.execute(sql)
             print("SQL student insert ends")
