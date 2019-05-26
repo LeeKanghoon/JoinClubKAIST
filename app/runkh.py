@@ -72,7 +72,6 @@ def interest_delete():
     index = request.form['index']
     print(index)
 
-
     if request.method == 'POST':
         return render_template('event.html', key=key, event_v = [1, 0, 1], event_num = [12, 14, 16], club_name = ["SEED KAIST", "KALDI"], event_name = ["open dongbang", "open coffe"],
         date = ["0304", "0506"], time = ["20:30~22:30", "9:30~11:30"], location = ["N1-102", "E78-204"], length = 3)
