@@ -269,15 +269,44 @@ def redirect_bookmark():
         print(club_idx)
         return render_template('bookmark.html', key=key, club_name=club_name, club_idx=club_idx, club_length=club_length)
 
-@app.route("/bookmark")
-def bookmark():
-    print("bookmark here!!")
-    return render_template('bookmark.html', key=key)
-
-@app.route("/interested")
-def interested():
-    print("interest here!!")
-    return render_template('interested.html')
+@app.route("/redirect_event")
+def redirect_event():
+    global key
+    if key == 0:
+        # alert
+        print("need to login")
+        return render_template('Log_in.html', key=key)
+    else:
+        print("redirect_event start")
+        # retrieve the club_info from db
+        print("DB retrieve starts...")
+        db = pymysql.connect(host='localhost',
+                             port=3306,
+                             user='root',
+                             passwd='junmo12345',
+                             db='joinclubkaist',
+                             charset='utf8')
+        try:
+            # Set cursor to the database
+            with db.cursor() as cursor:
+                # Write SQL query
+                sql = """SELECT Eno, Ename, Edate, Stime, Etime, Loc, Cname FROM EVENT INNER JOIN CLUB ON EVENT.ECsn = CLUB.Csn;"""
+                # Execute SQL
+                cursor.execute(sql)
+                # Fetch the result
+                # result is dictionary type
+                result = cursor.fetchall()
+        finally:
+            db.close()
+        print("DB retrieve ends...")
+        print(result)
+        print("redirect_event finish")
+        event_time = []
+        for row in result:
+            event_time.append(int(row[2]+row[3]))
+        print(event_time)
+        event_sort = [i[0] for i in sorted(enumerate(event_time), key=lambda x:x[1])] #event time sorted index
+        return render_template('event.html')
 
 @app.route("/redirect_login")
 def redirect_login():
