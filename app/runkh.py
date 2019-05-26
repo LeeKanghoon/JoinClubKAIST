@@ -60,10 +60,11 @@ def bookmark():
     print("bookmark here!!")
     return render_template('bookmark.html', key=key)
 
-@app.route("/interested")
-def interested():
-    print("interest here!!")
-    return render_template('interested.html', key=key)
+@app.route("/redirect_event")
+def redirect_event():
+    print("event here!!")
+    return render_template('event.html', key=key, club_name = ["SEED KAIST", "KALDI"], event_name = ["open dongbang", "open coffe"],
+    date = ["0304", "0506"], time = ["20:30~22:30", "9:30~11:30"], location = ["N1-102", "E78-204"], length = 3)
 
 @app.route("/redirect_login")
 def redirect_login():
