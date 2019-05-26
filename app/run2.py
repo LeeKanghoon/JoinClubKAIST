@@ -344,6 +344,22 @@ def interest_insert():
         print(time)
         print(location)
 
+        event_v = event_v[1:-1].split(",")
+        event_num = event_num[1:-1].split(",")
+        club_name = club_name[1:-1].split(",")
+        event_name = event_name[1:-1].split(",")
+        date = date[1:-1].split(",")
+        time = time[1:-1].split(",")
+        location = location[1:-1].split(",")
+
+        for i in range(len(event_v)):
+            event_v[i] = event_v[i][1:-1]
+            event_num[i] = event_num[i][1:-1]
+            club_name[i] = club_name[i][1:-1]
+            event_name[i] = event_name[i][1:-1]
+            date[i] = date[i][1:-1]
+            time[i] = time[i][1:-1]
+            location[i] = location[i][1:-1]
 
         index = int(index)
         event_v[index] = '1'
@@ -367,7 +383,7 @@ def interest_insert():
             db.close()
         print("DB update ends...")
         print("interest_insert finish")
-        return render_template('event.html', key=key, event_v=event_v, event_num=event_num, club_name=club_name,
+        return render_template('event.html#'+str(index), key=key, event_v=event_v, event_num=event_num, club_name=club_name,
                                event_name=event_name, date=date, time=time, location=location, length=length)
 
 
@@ -389,6 +405,25 @@ def interest_delete():
         index = request.form['index']
         print(event_v)
         print(type(event_v))
+
+        event_v = event_v[1:-1].split(",")
+        event_num = event_num[1:-1].split(",")
+        club_name = club_name[1:-1].split(",")
+        event_name = event_name[1:-1].split(",")
+        date = date[1:-1].split(",")
+        time = time[1:-1].split(",")
+        location = location[1:-1].split(",")
+
+        for i in range(len(event_v)):
+            event_v[i] = event_v[i][1:-1]
+            event_num[i] = event_num[i][1:-1]
+            club_name[i] = club_name[i][1:-1]
+            event_name[i] = event_name[i][1:-1]
+            date[i] = date[i][1:-1]
+            time[i] = time[i][1:-1]
+            location[i] = location[i][1:-1]
+
+
         index = int(index)
         event_v[index] = '0'
         eno = event_num[index]
@@ -411,7 +446,7 @@ def interest_delete():
             db.close()
         print("DB update ends...")
         print("interest_delete finish")
-        return render_template('event.html', key=key, event_v=event_v, event_num=event_num, club_name=club_name,
+        return render_template('event.html#'+str(index), key=key, event_v=event_v, event_num=event_num, club_name=club_name,
                                event_name=event_name, date=date, time=time, location=location, length=length)
 
 
