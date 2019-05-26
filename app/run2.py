@@ -234,7 +234,7 @@ def redirect_bookmark():
         print("need to login")
         return render_template('Log_in.html', key=key)
     else:
-        print("redirect_bookmark start")
+        print("redirect_bookmark_club start")
         # retrieve the club_info from db
         print("DB retrieve starts...")
         db = pymysql.connect(host='localhost',
@@ -257,7 +257,7 @@ def redirect_bookmark():
             db.close()
         print("DB retrieve ends...")
         print(result)
-        print("redirect_bookmark finish")
+        print("redirect_bookmark_club finish")
         club_name = []
         club_idx = ""
         club_length = len(result)
@@ -267,7 +267,58 @@ def redirect_bookmark():
         club_idx = club_idx[:-1]
         print(club_name)
         print(club_idx)
-        return render_template('bookmark.html', key=key, club_name=club_name, club_idx=club_idx, club_length=club_length)
+
+        print("redirect_bookmark_interest start")
+        # retrieve the interest_info from db
+        print("DB retrieve starts...")
+        db = pymysql.connect(host='localhost',
+                             port=3306,
+                             user='root',
+                             passwd='junmo12345',
+                             db='joinclubkaist',
+                             charset='utf8')
+        try:
+            # Set cursor to the database
+            with db.cursor() as cursor:
+                # Write SQL query
+                sql = """SELECT Eno, Ename, Edate, Stime, Etime, Loc, Cname FROM EVENT INNER JOIN INTEREST 
+                ON EVENT.Eno = INTEREST.IEno WHERE INTEREST.ISid='""" + str(sid) + """';"""
+                # Execute SQL
+                cursor.execute(sql)
+                # Fetch the result
+                # result is dictionary type
+                result = cursor.fetchall()
+        finally:
+            db.close()
+        print("DB retrieve ends...")
+        print("redirect_bookmark_interest finish")
+        event_time = []
+        for row in result:
+            event_time.append(int(row[2] + row[3]))
+        event_sort = [i[0] for i in sorted(enumerate(event_time), key=lambda x: x[1])]  # event time sorted index
+        length = len(result)
+        Eno = []
+        Ename = []
+        Edate = []
+        Time = []
+        Loc = []
+        Cname = []
+        for i in event_sort:
+            row = result[i]
+            Eno.append(str(row[0]))
+            Ename.append(row[1])
+            edate = row[2]
+            edate = edate[:4] + ' / ' + edate[4:6] + ' / ' + edate[6:8]
+            Edate.append(edate)
+            stime = row[3]
+            etime = row[4]
+            stime = stime[:2] + ':' + stime[2:4]
+            etime = etime[:2] + ':' + etime[2:4]
+            Time.append(stime + ' ~ ' + etime)
+            Loc.append(row[5])
+            Cname.append(row[6])
+        return render_template('bookmark.html', key=key, club_name=club_name, club_idx=club_idx, club_length=club_length,   # for club bookmark
+                               event_num=Eno, e_club_name=Cname, event_name=Ename, date=Edate, time=Time, location=Loc, length=length) # for event bookmark
 
 @app.route("/interest_insert", methods = ['POST'])
 def interest_insert():
@@ -292,7 +343,7 @@ def interest_insert():
         print(date)
         print(time)
         print(location)
-        
+
 
         index = int(index)
         event_v[index] = '1'
