@@ -277,7 +277,7 @@ def interest_insert():
     if request.method == 'POST':
         print("method starts...")
         event_v = request.form['event_v']
-        event_number = request.form['event_number']
+        event_num = request.form['event_num']
         club_name = request.form['club_name']
         event_name = request.form['event_name']
         date = request.form['date']
@@ -285,10 +285,18 @@ def interest_insert():
         location = request.form['location']
         length = request.form['length']
         index = request.form['index']
+        print(event_v)
+        print(event_num)
+        print(club_name)
+        print(event_name)
+        print(date)
+        print(time)
+        print(location)
+        
 
         index = int(index)
-        event_v[index] = not(event_v[index])
-        eno = event_number[index]
+        event_v[index] = '1'
+        eno = event_num[index]
 
         # retrieve the club_info from db
         print("DB update starts...")
@@ -301,15 +309,16 @@ def interest_insert():
         try:
             # Set cursor to the database
             with db.cursor() as cursor:
-                sql = """INSERT INTO INTERESTED_IN VALUES('""" + str(eno) + """', '""" + str(sid) + """');"""
+                sql = """INSERT INTO INTEREST VALUES('""" + str(eno) + """', '""" + str(sid) + """');"""
                 cursor.execute(sql)
             db.commit()
         finally:
             db.close()
         print("DB update ends...")
         print("interest_insert finish")
-        return render_template('event.html', key=key, event_v=event_v, event_number=event_number, club_name=club_name,
+        return render_template('event.html', key=key, event_v=event_v, event_num=event_num, club_name=club_name,
                                event_name=event_name, date=date, time=time, location=location, length=length)
+
 
 @app.route("/interest_delete", methods = ['POST'])
 def interest_delete():
@@ -319,7 +328,7 @@ def interest_delete():
     if request.method == 'POST':
         print("method starts...")
         event_v = request.form['event_v']
-        event_number = request.form['event_number']
+        event_num = request.form['event_num']
         club_name = request.form['club_name']
         event_name = request.form['event_name']
         date = request.form['date']
@@ -327,10 +336,11 @@ def interest_delete():
         location = request.form['location']
         length = request.form['length']
         index = request.form['index']
-
+        print(event_v)
+        print(type(event_v))
         index = int(index)
-        event_v[index] = not(event_v[index])
-        eno = event_number[index]
+        event_v[index] = '0'
+        eno = event_num[index]
 
         # retrieve the club_info from db
         print("DB update starts...")
@@ -343,14 +353,14 @@ def interest_delete():
         try:
             # Set cursor to the database
             with db.cursor() as cursor:
-                sql = """DELETE FROM INTERESTED_IN WHERE INTERESTED_IN.IEno = '""" + str(eno) + """' AND INTERESTED_IN.ISid='""" + str(sid) + """';"""
+                sql = """DELETE FROM INTEREST WHERE INTEREST.IEno = '""" + str(eno) + """' AND INTEREST.ISid='""" + str(sid) + """';"""
                 cursor.execute(sql)
             db.commit()
         finally:
             db.close()
         print("DB update ends...")
         print("interest_delete finish")
-        return render_template('event.html', key=key, event_v=event_v, event_number=event_number, club_name=club_name,
+        return render_template('event.html', key=key, event_v=event_v, event_num=event_num, club_name=club_name,
                                event_name=event_name, date=date, time=time, location=location, length=length)
 
 
@@ -424,7 +434,7 @@ def redirect_event():
             # Set cursor to the database
             with db.cursor() as cursor:
                 # Write SQL query
-                sql = """SELECT IEno, ISid FROM INTERESTED_IN WHERE INTERESTED_IN.ISid='""" + str(sid) + """';"""
+                sql = """SELECT IEno, ISid FROM INTEREST WHERE INTEREST.ISid='""" + str(sid) + """';"""
                 # Execute SQL
                 cursor.execute(sql)
                 # Fetch the result
@@ -435,10 +445,10 @@ def redirect_event():
         print("DB retrieve ends...")
         print(result)
         print("retrieve interested finish")
-        event_v = [0 for x in range(length)]
+        event_v = ['0' for x in range(length)]
         for row in result:
-            event_v[row[0]] = 1
-        return render_template('event.html', key=key, event_v=event_v, event_number=Eno, club_name=Cname,
+            event_v[row[0]] = '1'
+        return render_template('event.html', key=key, event_v=event_v, event_num=Eno, club_name=Cname,
                                event_name=Ename, date=Edate, time=Time, location=Loc, length=length)
 
 @app.route("/redirect_login")
