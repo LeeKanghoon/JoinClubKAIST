@@ -333,7 +333,7 @@ def interest_insert():
             db.close()
         print("DB update ends...")
         print("interest_insert finish")
-        return render_template('event.html', key=key, event_v=event_v, event_num=event_num, club_name=club_name,
+        return render_template('event.html#'+str(index), key=key, event_v=event_v, event_num=event_num, club_name=club_name,
                                event_name=event_name, date=date, time=time, location=location, length=length)
 
 
@@ -396,7 +396,7 @@ def interest_delete():
             db.close()
         print("DB update ends...")
         print("interest_delete finish")
-        return render_template('event.html', key=key, event_v=event_v, event_num=event_num, club_name=club_name,
+        return render_template('event.html#'+str(index), key=key, event_v=event_v, event_num=event_num, club_name=club_name,
                                event_name=event_name, date=date, time=time, location=location, length=length)
 
 
