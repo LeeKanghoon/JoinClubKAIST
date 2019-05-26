@@ -304,8 +304,26 @@ def redirect_event():
         event_time = []
         for row in result:
             event_time.append(int(row[2]+row[3]))
-        print(event_time)
         event_sort = [i[0] for i in sorted(enumerate(event_time), key=lambda x:x[1])] #event time sorted index
+
+        Eno = []
+        Ename = []
+        Edate = []
+        Time = []
+        Loc = []
+        Cname = []
+        for i in event_sort:
+            row = result[i]
+            Eno.append(str(row[0]))
+            Ename.append(row[1])
+            Edate.append(row[2])
+            stime = row[3]
+            etime = row[4]
+            stime = stime[:2] + ':' + stime[2:4]
+            etime = etime[:2] + ':' + etime[2:4]
+            Time.append(stime + ' ~ ' + etime)
+            Loc.append(row[5])
+            Cname.append(row[6])
         return render_template('event.html')
 
 @app.route("/redirect_login")
