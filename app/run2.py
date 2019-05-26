@@ -337,12 +337,6 @@ def interest_insert():
         length = request.form['length']
         index = request.form['index']
         print(event_v)
-        print(event_num)
-        print(club_name)
-        print(event_name)
-        print(date)
-        print(time)
-        print(location)
 
         event_v = event_v[1:-1].split(",")
         event_num = event_num[1:-1].split(",")
@@ -353,13 +347,22 @@ def interest_insert():
         location = location[1:-1].split(",")
 
         for i in range(len(event_v)):
-            event_v[i] = event_v[i][1:-1]
-            event_num[i] = event_num[i][1:-1]
-            club_name[i] = club_name[i][1:-1]
-            event_name[i] = event_name[i][1:-1]
-            date[i] = date[i][1:-1]
-            time[i] = time[i][1:-1]
-            location[i] = location[i][1:-1]
+            if i==0:
+                event_v[i] = event_v[i][1:-1]
+                event_num[i] = event_num[i][1:-1]
+                club_name[i] = club_name[i][1:-1]
+                event_name[i] = event_name[i][1:-1]
+                date[i] = date[i][1:-1]
+                time[i] = time[i][1:-1]
+                location[i] = location[i][1:-1]
+            else :
+                event_v[i] = event_v[i][2:-1]
+                event_num[i] = event_num[i][2:-1]
+                club_name[i] = club_name[i][2:-1]
+                event_name[i] = event_name[i][2:-1]
+                date[i] = date[i][2:-1]
+                time[i] = time[i][2:-1]
+                location[i] = location[i][2:-1]
 
         index = int(index)
         event_v[index] = '1'
@@ -376,14 +379,14 @@ def interest_insert():
         try:
             # Set cursor to the database
             with db.cursor() as cursor:
-                sql = """INSERT INTO INTEREST VALUES('""" + str(eno) + """', '""" + str(sid) + """');"""
+                sql = """INSERT INTO INTEREST VALUES('""" + eno + """', '""" + str(sid) + """');"""
                 cursor.execute(sql)
             db.commit()
         finally:
             db.close()
         print("DB update ends...")
         print("interest_insert finish")
-        return render_template('event.html#'+str(index), key=key, event_v=event_v, event_num=event_num, club_name=club_name,
+        return render_template('event.html', key=key, event_v=event_v, event_num=event_num, club_name=club_name,
                                event_name=event_name, date=date, time=time, location=location, length=length)
 
 
@@ -404,7 +407,6 @@ def interest_delete():
         length = request.form['length']
         index = request.form['index']
         print(event_v)
-        print(type(event_v))
 
         event_v = event_v[1:-1].split(",")
         event_num = event_num[1:-1].split(",")
@@ -415,13 +417,22 @@ def interest_delete():
         location = location[1:-1].split(",")
 
         for i in range(len(event_v)):
-            event_v[i] = event_v[i][1:-1]
-            event_num[i] = event_num[i][1:-1]
-            club_name[i] = club_name[i][1:-1]
-            event_name[i] = event_name[i][1:-1]
-            date[i] = date[i][1:-1]
-            time[i] = time[i][1:-1]
-            location[i] = location[i][1:-1]
+            if i==0:
+                event_v[i] = event_v[i][1:-1]
+                event_num[i] = event_num[i][1:-1]
+                club_name[i] = club_name[i][1:-1]
+                event_name[i] = event_name[i][1:-1]
+                date[i] = date[i][1:-1]
+                time[i] = time[i][1:-1]
+                location[i] = location[i][1:-1]
+            else :
+                event_v[i] = event_v[i][2:-1]
+                event_num[i] = event_num[i][2:-1]
+                club_name[i] = club_name[i][2:-1]
+                event_name[i] = event_name[i][2:-1]
+                date[i] = date[i][2:-1]
+                time[i] = time[i][2:-1]
+                location[i] = location[i][2:-1]
 
 
         index = int(index)
@@ -439,14 +450,15 @@ def interest_delete():
         try:
             # Set cursor to the database
             with db.cursor() as cursor:
-                sql = """DELETE FROM INTEREST WHERE INTEREST.IEno = '""" + str(eno) + """' AND INTEREST.ISid='""" + str(sid) + """';"""
+                #"""DELETE FROM BOOKMARK WHERE BOOKMARK.BCsn='""" + str(csn) + """' AND BOOKMARK.BSid='""" + str(sid) + """';"""
+                sql = """DELETE FROM INTEREST WHERE INTEREST.IEno = '""" + eno + """' AND INTEREST.ISid='""" + str(sid) + """';"""
                 cursor.execute(sql)
             db.commit()
         finally:
             db.close()
         print("DB update ends...")
         print("interest_delete finish")
-        return render_template('event.html#'+str(index), key=key, event_v=event_v, event_num=event_num, club_name=club_name,
+        return render_template('event.html', key=key, event_v=event_v, event_num=event_num, club_name=club_name,
                                event_name=event_name, date=date, time=time, location=location, length=length)
 
 
@@ -533,7 +545,8 @@ def redirect_event():
         print("retrieve interested finish")
         event_v = ['0' for x in range(length)]
         for row in result:
-            event_v[row[0]] = '1'
+            event_v[row[0]-1] = '1'
+        print(event_v)
         return render_template('event.html', key=key, event_v=event_v, event_num=Eno, club_name=Cname,
                                event_name=Ename, date=Edate, time=Time, location=Loc, length=length)
 
