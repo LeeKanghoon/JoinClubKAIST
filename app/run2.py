@@ -288,6 +288,7 @@ def redirect_bookmark():
                 INNER JOIN CLUB  
                 ON EVENT.ECsn = CLUB.Csn 
                 WHERE INTEREST.ISid='""" + str(sid) + """';"""
+
                 # Execute SQL
                 cursor.execute(sql)
                 # Fetch the result
@@ -324,7 +325,11 @@ def redirect_bookmark():
             Loc.append(row[5])
             Cname.append(row[6])
         return render_template('bookmark.html', key=key, club_name=club_name, club_idx=club_idx, club_length=club_length,   # for club bookmark
+<<<<<<< HEAD
                                event_num=Eno, e_club_name=Cname, event_name=Ename, date=Edate, time=Time, location=Loc, length=length)         # for event bookmark
+=======
+                               event_num=Eno, event_name=Ename, date=Edate, time=Time, location=Loc, length=length) # for event bookmark
+>>>>>>> 604712ab31c9726f04702a4f9c24e0526d6d852c
 
 @app.route("/interest_insert", methods = ['POST'])
 def interest_insert():

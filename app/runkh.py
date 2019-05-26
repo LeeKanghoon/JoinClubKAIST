@@ -53,7 +53,9 @@ def redirect_bookmark():
         print("need to login")
         return render_template('Log_in.html', key=key, club_name = ["SEED KAIST", "ani", "kaldi"], club_idx = "1,4,6",club_length=3 )
     else:
-        return render_template('bookmark.html', key=key, club_name = ["SEED KAIST", "ani", "kaldi"], club_idx = "1,4,6",club_length=3 )
+        return render_template('bookmark.html', key=key, club_name = ["SEED KAIST", "ani", "kaldi"], club_idx = "1,4,6",club_length=3 ,
+        event_num = [12, 14, 16], event_name = ["open dongbang", "open coffe"],
+        date = ["0304", "0506"], time = ["20:30~22:30", "9:30~11:30"], location = ["N1-102", "E78-204"], length = 3)
 
 @app.route("/bookmark")
 def bookmark():
@@ -85,7 +87,6 @@ def redirect_login():
 def elements():
     print("element here!!")
     return render_template('elements.html', key=key)
-
 
 
 @app.route("/login", methods = ['POST'])

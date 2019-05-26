@@ -2,13 +2,15 @@
 
 <html>
 	<head>
-		<title>Phantom by HTML5 UP</title>
+		<title>JoinClubKAIST</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 		<noscript>
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/noscript.css') }}"/>
 		</noscript>
+		<link rel=" shortcut icon" href="../static/images/logo_fav.png">
+		<link rel="icon" href="../static/images/logo_fav.png">
 	</head>
 	<body class="is-preload">
 		<!-- Wrapper -->
@@ -204,7 +206,96 @@
 
 								</script>
 								<br/><br/><br/><br/>
-								<h2>hihihihihi</h2>
+								<script>
+
+
+								var length = '{{length}}'.toString();
+								var e_club_name = '{{e_club_name}}';
+								var event_name = '{{event_name}}';
+								var event_date = '{{date}}';
+								var event_time = '{{time}}';
+								var event_location = '{{location}}';
+
+								var en1 = event_name.indexOf("]");
+								var ec1 = e_club_name.indexOf("]");
+								var ed1 = event_date.indexOf("]");
+								var et1 = event_time.indexOf("]");
+								var el1 = event_location.indexOf("]");
+
+
+								var en2 = event_name.substring(1, en1);
+								var ec2 = e_club_name.substring(1, en1);
+								var ed2 = event_date.substring(1, ed1);
+								var et2 = event_time.substring(1, et1);
+								var el2 = event_location.substring(1, el1);
+
+
+								var en3 = en2.split(",");
+								var ec3 = ec2.split(",");
+								var ed3 = ed2.split(",");
+								var et3 = et2.split(",");
+								var el3 = el2.split(",");
+
+
+								for (var i = 0; i<length; i++){
+									en3[i] = en3[i].toString();
+									ec3[i] = ec3[i].toString();
+									ed3[i] = ed3[i].toString();
+									et3[i] = et3[i].toString();
+									el3[i] = el3[i].toString();
+
+
+								if (i == 0){
+									en3[i] = en3[i].substring(5, en3[i].length-5);
+									ec3[i] = ec3[i].substring(5, ec3[i].length-5);
+									ed3[i] = ed3[i].substring(5, ed3[i].length-5);
+									et3[i] = et3[i].substring(5, et3[i].length-5);
+									el3[i] = el3[i].substring(5, el3[i].length-5);
+									} else {
+									en3[i] = en3[i].substring(6, en3[i].length-5);
+									ec3[i] = ec3[i].substring(6, ec3[i].length-5);
+									ed3[i] = ed3[i].substring(6, ed3[i].length-5);
+									et3[i] = et3[i].substring(6, et3[i].length-5);
+									el3[i] = el3[i].substring(6, el3[i].length-5);
+									}
+								}
+								</script>
+								<div id = "myHTMLWrapper1" class="inner" />
+								<script>
+
+									var wrapper = document.getElementById("myHTMLWrapper1");
+									var myHTML1 = '<p style = "display:none"></p>';
+
+
+									for (var i = 0 ; i < length ; i++) {
+											myHTML1 += '<div><h3>'+'<a href = #'+i+' name='+i+'></a>'+ec3[i]+' - '+en3[i]+'</h3>'
+											+'</div>'
+											+'<div class="table-wrapper">'
+											+'<table class="alt">'
+												+'<tbody>'
+													+'<tr>'
+														+'<td width="20%">Date</td>'
+														+'<td>'+ed3[i]+'</td>'
+													+'</tr>'
+													+'<tr>'
+														+'<td>Time</td>'
+														+'<td>'+et3[i]+'</td>'
+													+'</tr>'
+													+'<tr>'
+														+'<td>Location</td>'
+														+'<td>'+el3[i]+'</td>'
+													+'</tr>'
+												+'</tbody>'
+											+ '</table>'
+											+ '</div>';
+
+									}
+
+									wrapper.innerHTML = myHTML1;
+
+
+								</script>
+
 							</div>
 						</div>
 			</div>
