@@ -63,7 +63,7 @@ def bookmark():
 @app.route("/interested")
 def interested():
     print("interest here!!")
-    return render_template('interested.html')
+    return render_template('interested.html', key=key)
 
 @app.route("/redirect_login")
 def redirect_login():
