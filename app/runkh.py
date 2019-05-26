@@ -87,7 +87,6 @@ def elements():
     return render_template('elements.html', key=key)
 
 
-
 @app.route("/login", methods = ['POST'])
 def login():
     global key # will use global key variable
