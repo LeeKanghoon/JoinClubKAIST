@@ -63,7 +63,7 @@ def bookmark():
 @app.route("/redirect_event")
 def redirect_event():
     print("event here!!")
-    return render_template('event.html', key=key, club_name = ["SEED KAIST", "KALDI"], event_name = ["open dongbang", "open coffe"],
+    return render_template('event.html', key=key, event_v = [1, 0, 0], club_name = ["SEED KAIST", "KALDI"], event_name = ["open dongbang", "open coffe"],
     date = ["0304", "0506"], time = ["20:30~22:30", "9:30~11:30"], location = ["N1-102", "E78-204"], length = 3)
 
 @app.route("/redirect_login")

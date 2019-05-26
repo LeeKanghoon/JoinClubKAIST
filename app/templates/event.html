@@ -71,8 +71,8 @@
 					<div id="main">
 						<div class="inner">
 							<header>
-								<h1>Your interest</h1>
-								<p>These events are interesting.</p>
+								<h1>Event</h1>
+								<p>There are many events!!</p>
 							</header>
 							<!--section class="tiles">
 								<article class="style1">
@@ -94,12 +94,14 @@
 							var event_date = '{{date}}';
 							var event_time = '{{time}}';
 							var event_location = '{{location}}';
+							var event_v = '{{event_v}}';
 
 							var cn1 = club_name.indexOf("]");
 							var en1 = event_name.indexOf("]");
 							var ed1 = event_date.indexOf("]");
 							var et1 = event_time.indexOf("]");
 							var el1 = event_location.indexOf("]");
+							var ev1 = event_v.indexOf("]");
 
 
 							var cn2 = club_name.substring(1, cn1);
@@ -107,12 +109,16 @@
 							var ed2 = event_date.substring(1, ed1);
 							var et2 = event_time.substring(1, et1);
 							var el2 = event_location.substring(1, el1);
+							var ev2 = event_v.substring(1, ev1);
+
 
 							var cn3 = cn2.split(",");
 							var en3 = en2.split(",");
 							var ed3 = ed2.split(",");
 							var et3 = et2.split(",");
 							var el3 = el2.split(",");
+							var ev3 = ev2.split(",");
+
 
 							for (var i = 0; i<length; i++){
 								cn3[i] = cn3[i].toString();
@@ -120,6 +126,8 @@
 								ed3[i] = ed3[i].toString();
 								et3[i] = et3[i].toString();
 								el3[i] = el3[i].toString();
+								ev3[i] = ev3[i].toString();
+
 
 							if (i == 0){
 								cn3[i] = cn3[i].substring(5, cn3[i].length-5);
@@ -127,12 +135,14 @@
 								ed3[i] = ed3[i].substring(5, ed3[i].length-5);
 								et3[i] = et3[i].substring(5, et3[i].length-5);
 								el3[i] = el3[i].substring(5, el3[i].length-5);
+								ev3[i] = ev3[i].substring(5, ev3[i].length-5);
 								} else {
 								cn3[i] = cn3[i].substring(6, cn3[i].length-5);
 								en3[i] = en3[i].substring(6, en3[i].length-5);
 								ed3[i] = ed3[i].substring(6, ed3[i].length-5);
 								et3[i] = et3[i].substring(6, et3[i].length-5);
 								el3[i] = el3[i].substring(6, el3[i].length-5);
+								ev3[i] = ev3[i].substring(6, ev3[i].length-5);
 								}
 							}
 							</script>
@@ -142,25 +152,58 @@
 									var myHTML = '<p style = "display:none"></p>';
 
 									for (var i = 0 ; i < length ; i++) {
-										myHTML += '<h3>'+cn3[i]+' - '+en3[i]+'</h3>'
-										+'<div class="table-wrapper">'
-										+'<table class="alt">'
-											+'<tbody>'
-												+'<tr>'
-													+'<td width="20%">Date</td>'
-													+'<td>'+ed3[i]+'</td>'
-												+'</tr>'
-												+'<tr>'
-													+'<td>Time</td>'
-													+'<td>'+et3[i]+'</td>'
-												+'</tr>'
-												+'<tr>'
-													+'<td>Location</td>'
-													+'<td>'+el3[i]+'</td>'
-												+'</tr>'
-											+'</tbody>'
-										+ '</table>'
-										+ '</div>';
+										if(ev3[i]==0){
+											myHTML += '<h3>'+cn3[i]+' - '+en3[i]+'</h3>'
+											+'{% if (key == 1) %}'
+											+'<form method="post" action="interest_insert">'
+											+'<h6><input type="submit" name="interest" class="primary" value="interest" /></h6>'
+											+'</form>'
+											+'{% endif %}'
+											+'<div class="table-wrapper">'
+											+'<table class="alt">'
+												+'<tbody>'
+													+'<tr>'
+														+'<td width="20%">Date</td>'
+														+'<td>'+ed3[i]+'</td>'
+													+'</tr>'
+													+'<tr>'
+														+'<td>Time</td>'
+														+'<td>'+et3[i]+'</td>'
+													+'</tr>'
+													+'<tr>'
+														+'<td>Location</td>'
+														+'<td>'+el3[i]+'</td>'
+													+'</tr>'
+												+'</tbody>'
+											+ '</table>'
+											+ '</div>';
+										}else{
+											myHTML += '<h3>'+cn3[i]+' - '+en3[i]+'</h3>'
+											+'{% if (key == 1) %}'
+											+'<form method="post" action="interest_delete">'
+											+'<h5><input type="submit" name="interested" class="primary" value="interested" /></h5>'
+											+'</form>'
+											+'{% endif %}'
+											+'<div class="table-wrapper">'
+											+'<table class="alt">'
+												+'<tbody>'
+													+'<tr>'
+														+'<td width="20%">Date</td>'
+														+'<td>'+ed3[i]+'</td>'
+													+'</tr>'
+													+'<tr>'
+														+'<td>Time</td>'
+														+'<td>'+et3[i]+'</td>'
+													+'</tr>'
+													+'<tr>'
+														+'<td>Location</td>'
+														+'<td>'+el3[i]+'</td>'
+													+'</tr>'
+												+'</tbody>'
+											+ '</table>'
+											+ '</div>';
+										}
+
 									}
 
 									wrapper.innerHTML = myHTML;
