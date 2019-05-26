@@ -148,6 +148,15 @@
 							</script>
 							<div id = "myHTMLWrapper" class="inner" />
 								<script>
+
+								var length = '{{length}}'.toString();
+								var club_name = '{{club_name}}';
+								var event_name = '{{event_name}}';
+								var event_date = '{{date}}';
+								var event_time = '{{time}}';
+								var event_location = '{{location}}';
+								var event_v = '{{event_v}}';
+
 									var wrapper = document.getElementById("myHTMLWrapper");
 									var myHTML = '<p style = "display:none"></p>';
 
@@ -157,6 +166,16 @@
 											+'{% if (key == 1) %}'
 											+'<form method="post" action="interest_insert">'
 											+'<h6><input type="submit" name="interest" class="primary" value="interest" /></h6>'
+											+ '<input type = "hidden" name = "key" value = {{key}}>'
+											+ '<input type = "hidden" name = "club_name" value = {{club_name}}>'
+											+ '<input type = "hidden" name = "event_name" value = {{event_name}}>'
+											+ '<input type = "hidden" name = "date" value = {{date}}>'
+											+ '<input type = "hidden" name = "time" value = {{time}}>'
+											+ '<input type = "hidden" name = "location" value = {{location}}>'
+											+ '<input type = "hidden" name = "length" value = {{length}}>'
+											+ '<input type = "hidden" name = "event_v" value = {{event_v}}>'
+											+ '<input type = "hidden" name = "event_num" value = {{event_num}}>'
+											+ '<input type = "hidden" name = "index" value = '+i+'>'
 											+'</form>'
 											+'{% endif %}'
 											+'<div class="table-wrapper">'
@@ -182,6 +201,16 @@
 											+'{% if (key == 1) %}'
 											+'<form method="post" action="interest_delete">'
 											+'<h5><input type="submit" name="interested" class="primary" value="interested" /></h5>'
+											+ '<input type = "hidden" name = "key" value = {{key}}>'
+											+ '<input type = "hidden" name = "club_name" value = {{club_name}}>'
+											+ '<input type = "hidden" name = "event_name" value = {{event_name}}>'
+											+ '<input type = "hidden" name = "date" value = {{date}}>'
+											+ '<input type = "hidden" name = "time" value = {{time}}>'
+											+ '<input type = "hidden" name = "location" value = {{location}}>'
+											+ '<input type = "hidden" name = "length" value = {{length}}>'
+											+ '<input type = "hidden" name = "event_v" value = {{event_v}}>'
+											+ '<input type = "hidden" name = "event_num" value = {{event_num}}>'
+											+ '<input type = "hidden" name = "index" value = '+i+'>'
 											+'</form>'
 											+'{% endif %}'
 											+'<div class="table-wrapper">'
