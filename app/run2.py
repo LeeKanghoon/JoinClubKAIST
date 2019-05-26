@@ -234,7 +234,7 @@ def redirect_bookmark():
         print("need to login")
         return render_template('Log_in.html', key=key)
     else:
-        print("redirect_bookmark start")
+        print("redirect_bookmark_club start")
         # retrieve the club_info from db
         print("DB retrieve starts...")
         db = pymysql.connect(host='localhost',
@@ -257,7 +257,7 @@ def redirect_bookmark():
             db.close()
         print("DB retrieve ends...")
         print(result)
-        print("redirect_bookmark finish")
+        print("redirect_bookmark_club finish")
         club_name = []
         club_idx = ""
         club_length = len(result)
@@ -267,7 +267,58 @@ def redirect_bookmark():
         club_idx = club_idx[:-1]
         print(club_name)
         print(club_idx)
-        return render_template('bookmark.html', key=key, club_name=club_name, club_idx=club_idx, club_length=club_length)
+
+        print("redirect_bookmark_interest start")
+        # retrieve the interest_info from db
+        print("DB retrieve starts...")
+        db = pymysql.connect(host='localhost',
+                             port=3306,
+                             user='root',
+                             passwd='junmo12345',
+                             db='joinclubkaist',
+                             charset='utf8')
+        try:
+            # Set cursor to the database
+            with db.cursor() as cursor:
+                # Write SQL query
+                sql = """SELECT Eno, Ename, Edate, Stime, Etime, Loc, Cname FROM EVENT INNER JOIN INTEREST 
+                ON EVENT.Eno = INTEREST.IEno WHERE INTEREST.ISid='""" + str(sid) + """';"""
+                # Execute SQL
+                cursor.execute(sql)
+                # Fetch the result
+                # result is dictionary type
+                result = cursor.fetchall()
+        finally:
+            db.close()
+        print("DB retrieve ends...")
+        print("redirect_bookmark_interest finish")
+        event_time = []
+        for row in result:
+            event_time.append(int(row[2] + row[3]))
+        event_sort = [i[0] for i in sorted(enumerate(event_time), key=lambda x: x[1])]  # event time sorted index
+        length = len(result)
+        Eno = []
+        Ename = []
+        Edate = []
+        Time = []
+        Loc = []
+        Cname = []
+        for i in event_sort:
+            row = result[i]
+            Eno.append(str(row[0]))
+            Ename.append(row[1])
+            edate = row[2]
+            edate = edate[:4] + ' / ' + edate[4:6] + ' / ' + edate[6:8]
+            Edate.append(edate)
+            stime = row[3]
+            etime = row[4]
+            stime = stime[:2] + ':' + stime[2:4]
+            etime = etime[:2] + ':' + etime[2:4]
+            Time.append(stime + ' ~ ' + etime)
+            Loc.append(row[5])
+            Cname.append(row[6])
+        return render_template('bookmark.html', key=key, club_name=club_name, club_idx=club_idx, club_length=club_length,   # for club bookmark
+                               event_num=Eno, e_club_name=Cname, event_name=Ename, date=Edate, time=Time, location=Loc, length=length) # for event bookmark
 
 @app.route("/interest_insert", methods = ['POST'])
 def interest_insert():
@@ -286,12 +337,6 @@ def interest_insert():
         length = request.form['length']
         index = request.form['index']
         print(event_v)
-        print(event_num)
-        print(club_name)
-        print(event_name)
-        print(date)
-        print(time)
-        print(location)
 
         event_v = event_v[1:-1].split(",")
         event_num = event_num[1:-1].split(",")
@@ -302,14 +347,22 @@ def interest_insert():
         location = location[1:-1].split(",")
 
         for i in range(len(event_v)):
-            event_v[i] = event_v[i][1:-1]
-            event_num[i] = event_num[i][1:-1]
-            club_name[i] = club_name[i][1:-1]
-            event_name[i] = event_name[i][1:-1]
-            date[i] = date[i][1:-1]
-            time[i] = time[i][1:-1]
-            location[i] = location[i][1:-1]
-
+            if i==0:
+                event_v[i] = event_v[i][1:-1]
+                event_num[i] = event_num[i][1:-1]
+                club_name[i] = club_name[i][1:-1]
+                event_name[i] = event_name[i][1:-1]
+                date[i] = date[i][1:-1]
+                time[i] = time[i][1:-1]
+                location[i] = location[i][1:-1]
+            else :
+                event_v[i] = event_v[i][2:-1]
+                event_num[i] = event_num[i][2:-1]
+                club_name[i] = club_name[i][2:-1]
+                event_name[i] = event_name[i][2:-1]
+                date[i] = date[i][2:-1]
+                time[i] = time[i][2:-1]
+                location[i] = location[i][2:-1]
 
         index = int(index)
         event_v[index] = '1'
@@ -326,14 +379,14 @@ def interest_insert():
         try:
             # Set cursor to the database
             with db.cursor() as cursor:
-                sql = """INSERT INTO INTEREST VALUES('""" + str(eno) + """', '""" + str(sid) + """');"""
+                sql = """INSERT INTO INTEREST VALUES('""" + eno + """', '""" + str(sid) + """');"""
                 cursor.execute(sql)
             db.commit()
         finally:
             db.close()
         print("DB update ends...")
         print("interest_insert finish")
-        return render_template('event.html#'+str(index), key=key, event_v=event_v, event_num=event_num, club_name=club_name,
+        return render_template('event.html', key=key, event_v=event_v, event_num=event_num, club_name=club_name,
                                event_name=event_name, date=date, time=time, location=location, length=length)
 
 
@@ -354,7 +407,6 @@ def interest_delete():
         length = request.form['length']
         index = request.form['index']
         print(event_v)
-        print(type(event_v))
 
         event_v = event_v[1:-1].split(",")
         event_num = event_num[1:-1].split(",")
@@ -365,13 +417,22 @@ def interest_delete():
         location = location[1:-1].split(",")
 
         for i in range(len(event_v)):
-            event_v[i] = event_v[i][1:-1]
-            event_num[i] = event_num[i][1:-1]
-            club_name[i] = club_name[i][1:-1]
-            event_name[i] = event_name[i][1:-1]
-            date[i] = date[i][1:-1]
-            time[i] = time[i][1:-1]
-            location[i] = location[i][1:-1]
+            if i==0:
+                event_v[i] = event_v[i][1:-1]
+                event_num[i] = event_num[i][1:-1]
+                club_name[i] = club_name[i][1:-1]
+                event_name[i] = event_name[i][1:-1]
+                date[i] = date[i][1:-1]
+                time[i] = time[i][1:-1]
+                location[i] = location[i][1:-1]
+            else :
+                event_v[i] = event_v[i][2:-1]
+                event_num[i] = event_num[i][2:-1]
+                club_name[i] = club_name[i][2:-1]
+                event_name[i] = event_name[i][2:-1]
+                date[i] = date[i][2:-1]
+                time[i] = time[i][2:-1]
+                location[i] = location[i][2:-1]
 
 
         index = int(index)
@@ -389,14 +450,15 @@ def interest_delete():
         try:
             # Set cursor to the database
             with db.cursor() as cursor:
-                sql = """DELETE FROM INTEREST WHERE INTEREST.IEno = '""" + str(eno) + """' AND INTEREST.ISid='""" + str(sid) + """';"""
+                #"""DELETE FROM BOOKMARK WHERE BOOKMARK.BCsn='""" + str(csn) + """' AND BOOKMARK.BSid='""" + str(sid) + """';"""
+                sql = """DELETE FROM INTEREST WHERE INTEREST.IEno = '""" + eno + """' AND INTEREST.ISid='""" + str(sid) + """';"""
                 cursor.execute(sql)
             db.commit()
         finally:
             db.close()
         print("DB update ends...")
         print("interest_delete finish")
-        return render_template('event.html#'+str(index), key=key, event_v=event_v, event_num=event_num, club_name=club_name,
+        return render_template('event.html', key=key, event_v=event_v, event_num=event_num, club_name=club_name,
                                event_name=event_name, date=date, time=time, location=location, length=length)
 
 
@@ -483,7 +545,8 @@ def redirect_event():
         print("retrieve interested finish")
         event_v = ['0' for x in range(length)]
         for row in result:
-            event_v[row[0]] = '1'
+            event_v[row[0]-1] = '1'
+        print(event_v)
         return render_template('event.html', key=key, event_v=event_v, event_num=Eno, club_name=Cname,
                                event_name=Ename, date=Edate, time=Time, location=Loc, length=length)
 
