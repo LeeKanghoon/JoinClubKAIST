@@ -324,6 +324,17 @@ def redirect_bookmark():
             Time.append(stime + ' ~ ' + etime)
             Loc.append(row[5])
             Cname.append(row[6])
+
+        print(Ename)
+        print(type(Ename))
+        print(Edate)
+        print(type(Edate))
+        print(Time)
+        print(type(Time))
+        print(Loc)
+        print(type(Loc))
+        print(Cname)
+        print(type(Cname))
         return render_template('bookmark.html', key=key, club_name=club_name, club_idx=club_idx, club_length=club_length,   # for club bookmark
                                event_num=Eno, e_club_name=Cname, event_name=Ename, date=Edate, time=Time, location=Loc, length=length)         # for event bookmark
 
