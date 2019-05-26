@@ -208,52 +208,51 @@
 								<br/><br/><br/><br/>
 								<script>
 
-
 								var length = '{{length}}'.toString();
-								var e_club_name = '{{e_club_name}}';
+								var club_name = '{{e_club_name}}';
 								var event_name = '{{event_name}}';
 								var event_date = '{{date}}';
 								var event_time = '{{time}}';
 								var event_location = '{{location}}';
 
+								var cn1 = e_club_name.indexOf("]");
 								var en1 = event_name.indexOf("]");
-								var ec1 = e_club_name.indexOf("]");
 								var ed1 = event_date.indexOf("]");
 								var et1 = event_time.indexOf("]");
-								var el1 = event_location.indexOf("]");
+								var el1 = event_location.indexOf("]");=
 
 
+								var cn2 = e_club_name.substring(1, cn1);
 								var en2 = event_name.substring(1, en1);
-								var ec2 = e_club_name.substring(1, en1);
 								var ed2 = event_date.substring(1, ed1);
 								var et2 = event_time.substring(1, et1);
 								var el2 = event_location.substring(1, el1);
 
 
+								var cn3 = cn2.split(",");
 								var en3 = en2.split(",");
-								var ec3 = ec2.split(",");
 								var ed3 = ed2.split(",");
 								var et3 = et2.split(",");
 								var el3 = el2.split(",");
 
 
 								for (var i = 0; i<length; i++){
+									cn3[i] = cn3[i].toString();
 									en3[i] = en3[i].toString();
-									ec3[i] = ec3[i].toString();
 									ed3[i] = ed3[i].toString();
 									et3[i] = et3[i].toString();
 									el3[i] = el3[i].toString();
 
 
 								if (i == 0){
+									cn3[i] = cn3[i].substring(5, cn3[i].length-5);
 									en3[i] = en3[i].substring(5, en3[i].length-5);
-									ec3[i] = ec3[i].substring(5, ec3[i].length-5);
 									ed3[i] = ed3[i].substring(5, ed3[i].length-5);
 									et3[i] = et3[i].substring(5, et3[i].length-5);
 									el3[i] = el3[i].substring(5, el3[i].length-5);
 									} else {
+									cn3[i] = cn3[i].substring(6, cn3[i].length-5);
 									en3[i] = en3[i].substring(6, en3[i].length-5);
-									ec3[i] = ec3[i].substring(6, ec3[i].length-5);
 									ed3[i] = ed3[i].substring(6, ed3[i].length-5);
 									et3[i] = et3[i].substring(6, et3[i].length-5);
 									el3[i] = el3[i].substring(6, el3[i].length-5);
