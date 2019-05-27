@@ -355,7 +355,6 @@ def interest_insert():
         location = request.form['location']
         length = request.form['length']
         index = request.form['index']
-        print(event_v)
 
         event_v = event_v[1:-1].split(",")
         event_num = event_num[1:-1].split(",")
@@ -384,9 +383,10 @@ def interest_insert():
                 location[i] = location[i][2:-1]
 
         index = int(index)
-        event_v[index] = '1'
         eno = event_num[index]
-
+        event_v[index] = '1'
+        print(event_v)
+        print(eno)
         # retrieve the club_info from db
         print("DB update starts...")
         db = pymysql.connect(host='localhost',
@@ -425,7 +425,6 @@ def interest_delete():
         location = request.form['location']
         length = request.form['length']
         index = request.form['index']
-        print(event_v)
 
         event_v = event_v[1:-1].split(",")
         event_num = event_num[1:-1].split(",")
@@ -455,8 +454,10 @@ def interest_delete():
 
 
         index = int(index)
-        event_v[index] = '0'
         eno = event_num[index]
+        event_v[index] = '0'
+        print(event_v)
+        print(eno)
 
         # retrieve the club_info from db
         print("DB update starts...")
@@ -564,7 +565,8 @@ def redirect_event():
         print("retrieve interested finish")
         event_v = ['0' for x in range(length)]
         for row in result:
-            event_v[row[0]-1] = '1'
+            index = Eno.index(str(row[0]))
+            event_v[index] = '1'
         print(event_v)
         return render_template('event.html', key=key, event_v=event_v, event_num=Eno, club_name=Cname,
                                event_name=Ename, date=Edate, time=Time, location=Loc, length=length)
@@ -609,7 +611,7 @@ def login():
         else:
             row = result[0]
             pw_ = row[2]
-            pw_ = pw_[:-1]
+            #pw_ = pw_[:-1]
             if (id == row[1]) and (pw == pw_):
                 print("key is now " + str(key))
                 key = 1
