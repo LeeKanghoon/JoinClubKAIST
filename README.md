@@ -1,2 +1,5 @@
 # JoinClubKAIST
 JCK
+
+TEAM SEED KAIST
+JJM, LKH, SJY
